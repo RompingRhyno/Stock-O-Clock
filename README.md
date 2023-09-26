@@ -6,14 +6,9 @@ This browser based web application to ...
 
 ## 2. Names of Contributors
 List team members and/or short bio's here... 
-<<<<<<< HEAD
-Hello, my name is Alex. I'm interested in the challenges that will come with developing this project.
-=======
+* Hello, my name is Alex. I'm interested in the challenges that will come with developing this project.
 * Ryan - the RompingRhyno
 * Hi, My name is Logan. I'm super excited to make this cool new app.
->>>>>>> b8b5ef1dc4a4b9687dd5bb2f0a9f0762cb38a747
-* ...
-* ...
 	
 ## 3. Technologies and Resources Used
 List technologies (with version numbers), API's, icons, fonts, images, media or data sources, and other resources that were used.

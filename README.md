@@ -28,7 +28,7 @@ Here are the steps ...
 Here are some known bugs:
 * butterfly
 * stick bug
-* ...
+* ladybug
 
 ## 6. Features for Future
 What we'd like to build in the future:

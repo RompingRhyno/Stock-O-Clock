@@ -32,8 +32,9 @@ Here are some known bugs:
 
 ## 6. Features for Future
 What we'd like to build in the future:
-* ...
-* ...
+* Food Entry
+* Recipe Generator
+* Grocery List Maker
 * ...
 	
 ## 7. Contents of Folder

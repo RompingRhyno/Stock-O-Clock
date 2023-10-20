@@ -10,26 +10,186 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap Library CSS CDN go here -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" -->
+        <!-- integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
     <!-- Boostrap Library JS CDN  go here -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <!-- Other libraries go here -->
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
 
 <body>
-    <div id="container">
-        <div id="header">
-            <div id="headerGrid">
-                <div id="headerMenu">
-                    Stay Green
-                </div>
-            </div>
+    <div class="grid-container">
+        <div class="main">
+          <img class="banner-img" src="./images/mainbanner.jpg" alt="banner">
+          <div class="text-block">
+            <header>
+              <p>A lot goes into getting food to your table.</p>
+              <p>How can we prevent waste?</p>
+            </header>
+          </div>
         </div>
-    </div>
+        <div class="subscribe-bar">
+          <div class="sub-left">
+            <i class="fa fa-envelope"></i>
+          </div>
+          <div class="sub-description">
+            <aside>
+              <p>Subscribe for updates on all the ways we are evolving our project to reduce food waste. </p>
+            </aside>
+          </div>
+          <div class="sub-form">
+            <form class="form-grid">
+              <div class="input-text">
+                <input type="text" placeholder="Email" name="email" required>
+              </div>
+              <div class="button">
+                <input type="submit" value="Subscribe">
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="sidebar">
+          <div class="logo-box">
+            <img class="logo" src="./images/logo.svg" alt="logo">
+          </div>
+          <nav class="navbar">
+            <div class="nav-icon1">
+              <div class="nav-icon">
+                <i class="fa fa-users"></i>
+              </div>
+            </div>
+            <div class="nav-icon2">
+              <div class="nav-icon">
+                <i class="fa fa-dot-circle-o nav-icon"></i>
+              </div>
+            </div>
+            <div class="nav-icon3">
+              <div class="nav-icon">
+                <i class="fa fa-mobile-phone nav-icon"></i>
+              </div>
+            </div>
+            <div class="nav-icon4">
+              <div class="nav-icon">
+                <i class="fa fa-star-half-full nav-icon"></i>
+              </div>
+            </div>
+            <div class="nav-text1">
+              <p class="nav-text">Team</p>
+            </div>
+            <div class="nav-text2">
+              <p class="nav-text">Goals</p>
+            </div>
+            <div class="nav-text3">
+              <p class="nav-text">App</p>
+            </div>
+            <div class="nav-text4">
+              <p class="nav-text">Users</p>
+            </div>
+          </nav>
+          <div class="latest">
+            <p class="blue">Latest Changes:</p>
+            <br>
+            <p>Oct. 13, 2023</p>
+            <p class="blue">HTML landing page coded</p>
+            <br>
+            <p>Oct. 9, 2023</p>
+            <p class="blue">Wireflow for core drawn</p>
+            <br>
+            <p>Oct. 6, 2023</p>
+            <p class="blue">Taskflows created</p>
+            <br>
+            <p>Oct. 2, 2023</p>
+            <p class="blue">Red routes selected</p>
+          </div>
+        </div>
+        <figure class="article-img1">
+          <img class="article-img" src="./images/mouldy.jpg" alt="moldy">
+          <figcaption>Spoiled produce makes up a large part of wasted food.</figcaption>
+        </figure>
+        <section class="article-text1">
+          <h1 class="article-head">The Big Picture</h1>
+          <p class="smallbr">
+            <br>
+          </p>
+          <article>
+            <h2 class="article">
+              We need to step away from the microscope and notice how our portions get out of proportion. One mouldy fruit is a small problem to one person but can be a big problem for the rest of the world. A macro perspective would show all the energy that goes into the life cycle of food production. If... 
+            </h2>
+          </article>
+          <p class="article-link">Read more</p>
+        </section>
+        <figure class="article-img2">
+          <img class="article-img" src="./images/fridge.jpg" alt="fridge">
+          <figcaption>"I" is for inventory.</figcaption>
+        </figure>
+        <section class="article-text2">
+          <h1 class="article-head">Our Take-out</h1>
+          <p class="smallbr">
+            <br>
+          </p>
+          <article>
+            <h2 class="article">We wanted to tackle the problem from a familiar place: the fridge. It's a place that we go to all the time, but there's no signs, no addresses, nothing. It is often a place where food is lost until spoiled. Our team realized this was a pain point we could focus our strategy towards. The ideas were endless... 
+            </h2>
+          </article>
+          <p class="article-link">Read more</p>
+        </section>
+        <figure class="article-img3">
+          <img class="article-img" src="./images/app.jpg" alt="app">
+          <figcaption>Strive for seamless interaction between core features.</figcaption>
+        </figure>
+        <section class="article-text3">
+          <h1 class="article-head">The App-etizer</h1>
+          <p class="smallbr">
+            <br>
+          </p>
+          <article>
+            <h2 class="article">The main feature we are working to perfect is the food expiry tracking. Our biggest concern was that it had to be intuitive and convenient. We had to consider a wide range of users. Some would prefer a minimal UI, while some would prefer to customize things exactly to their needs. The core features...</h2>
+          </article>
+          <p class="article-link">Read more</p>
+        </section>
+        <figure class="article-img4">
+          <img class="article-img" src="./images/sprout.jpg" alt="grow">
+          <figcaption>Envisioniong how we can scale into the future.</figcaption>
+        </figure>
+        <section class="article-text4">
+          <h1 class="article-head">Room for Desserts</h1>
+          <p class="smallbr">
+            <br>
+          </p>
+          <article>
+            <h2 class="article"> 
+            Our project theme is "smart cities". We decided that food management would be our focal point to tackle broader topics like sustainability and waste management. Still, we wanted to go a step further and consider the scalability of this app for the future. While we already see smart fridges, there... 
+            </h2>    
+          </article>
+          <p class="article-link">Read more</p>
+        </section>
+        <div class="footer">
+          <footer>
+            <div class="contact">
+              <p>
+                <span style="color:white">Contact: </span>inquiries@stockoclock.com
+              </p>
+            </div>
+            <div class="social1">
+              <i class="fa fa-facebook-square"></i>
+            </div>
+            <div class="social2">
+              <i class="fa fa-youtube-square"></i>
+            </div>
+            <div class="social3">
+              <i class=" 	fa fa-github-square"></i>
+            </div>
+          </footer>
+        </div>
+      </div>
     
     <!------------------------------>
     <!-- Your HTML Layout go here -->

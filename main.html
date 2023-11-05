@@ -44,6 +44,24 @@
     <!-- Your HTML Layout go here -->
     <!------------------------------>
     <!-- Stuff for body goes here -->
+    <div class="add-button fixed-bottom">
+        <i class="fa-solid fa-circle-plus fa-2xl"></i>
+        <button class="btn" onclick="openForm()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+    </div> 
+    <div class="form-popup" id="myForm">
+        <form action="/action_page.php" class="form-container">
+          <h1>Add Food</h1>
+      
+          <label for="food"><b>Food</b></label>
+          <input type="text" placeholder="Enter Food" name="food" required>
+      
+          <label for="date"><b>Best Before</b></label>
+          <input type="date" placeholder="Date" name="date" required>
+      
+          <button type="add" class="btn">Add</button>
+          <button type="close" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
     <footer class="fixed-bottom">
         <div class="shop-container">
             <a class="link" href="/shoplist.html">

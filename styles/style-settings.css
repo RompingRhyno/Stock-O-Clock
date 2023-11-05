@@ -1,4 +1,4 @@
-}* {
+* {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
@@ -39,7 +39,7 @@ body {
   border-bottom-left-radius: 10px;
   padding: 10%;
 }
-footer{
+footer {
   display:grid;
   grid-template-areas: "shop stock setting";
   grid-template-columns: 1fr 1fr 1fr;

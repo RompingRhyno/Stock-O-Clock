@@ -1,0 +1,53 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body {
+  background-color: #2c362a;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 0px;
+}
+.shop-container {
+  grid-area: shop;
+  text-align: center;
+  padding: 10%;
+  border-style: hidden;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background-color: rgb(150, 99, 49);
+}
+.stock-container {
+  grid-area: stock;
+  background-color: rgb(150, 99, 49);
+  text-align: center;
+  color: tan;
+}
+.setting-container {
+  grid-area: setting;
+  text-align: center;
+  padding: 10%;
+  border-style: hidden;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background-color: rgb(150, 99, 49);
+}
+.tab-container {
+  background-color: #2c362a;
+  border-style: hidden, solid, solid, solid;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding:10%;
+}
+footer{
+  display:grid;
+  grid-template-areas: "shop stock setting";
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.nav-icon {
+  font-size: 15pt;
+}
+.link {
+  text-decoration: none;
+  color: inherit;
+}

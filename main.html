@@ -44,9 +44,9 @@
     <!-- Your HTML Layout go here -->
     <!------------------------------>
     <!-- Stuff for body goes here -->
-    <div class="add-button fixed-bottom">
+    <div class="icon-button fixed-bottom">
         <i class="fa-solid fa-circle-plus fa-2xl"></i>
-        <button class="btn" onclick="openForm()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+        <button class="add-btn" onclick="openForm()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
     </div> 
     <div class="form-popup" id="myForm">
         <form action="/action_page.php" class="form-container">
@@ -54,12 +54,15 @@
       
           <label for="food"><b>Food</b></label>
           <input type="text" placeholder="Enter Food" name="food" required>
+          <br><br>
       
           <label for="date"><b>Best Before</b></label>
-          <input type="date" placeholder="Date" name="date" required>
-      
+          <input type="date" placeholder="Date" name="date">
+          <br><br>
+          <div class="form-submission">
           <button type="add" class="btn">Add</button>
           <button type="close" class="btn cancel" onclick="closeForm()">Close</button>
+          </div>
         </form>
     </div>
     <footer class="fixed-bottom">

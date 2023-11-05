@@ -51,13 +51,13 @@ footer{
   text-decoration: none;
   color: inherit;
 }
-.add-button {
+.icon-button {
   padding-bottom: 28%;
   padding-left: 73%;
   font-size: 30pt;
   color: rgb(134, 163, 236)
 }
-.add-button .btn {
+.icon-button .add-btn {
   position: absolute;
   top: 16%;
   left: 83%;
@@ -69,7 +69,7 @@ footer{
   border: none;
   cursor: pointer;
 }
-.btn {
+.add-btn {
   border-radius: 100%;
   line-height: 40pt;
   font-size: 10pt;
@@ -77,13 +77,24 @@ footer{
 .form-popup {
   display: none;
   position: fixed;
-  bottom: 50%;
-  right: 13%;
-  border: 3px solid #f1f1f1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid rgb(150, 99, 49);
   z-index: 9;
+  width: 80%;
 }
 .form-container {
-  max-width: 300px;
-  padding: 10px;
-  background-color: white;
+  padding: 20px;
+  background-color: rgb(134, 163, 236);
+}
+.form-container > *{
+  padding: 5px;
+}
+.form-submission {
+  text-align: right;
+}
+.form-submission > button {
+  border-style: solid;
+  --bs-btn-border-color: black;
 }

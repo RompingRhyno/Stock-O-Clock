@@ -229,6 +229,40 @@ figcaption {
 footer {
     font-size: 3vmin 
 }
+.firebaseui-button {
+    background-color: #ff626e !important;
+    color: white !important;
+  }
+  .firebaseui-container{
+    background-color: rgb(162, 172, 139);
+  }
+  .firebaseui-textfield.mdl-textfield .firebaseui-label:after {
+    background-color: #ff626e;
+  }
+  .mdl-progress > .progressbar {
+    background-color: #ff626e !important;
+  }
+  
+  .mdl-progress > .bufferbar {
+    background-image: linear-gradient(
+            90deg,
+            hsla(0, 0%, 100%, 0.7),
+            hsla(0, 0%, 100%, 0.7)
+        ),
+        linear-gradient(90deg, #ff626e, #ff626e) !important;
+    z-index: 0;
+    left: 0;
+  }
+  
+  .mdl-progress:not(.mdl-progress--indeterminate) > .auxbar,
+  .mdl-progress:not(.mdl-progress__indeterminate) > .auxbar {
+    background-image: linear-gradient(
+            90deg,
+            hsla(0, 0%, 100%, 0.9),
+            hsla(0, 0%, 100%, 0.9)
+        ),
+        linear-gradient(90deg, #ff626e, #ff626e) !important;
+  }
 @media only screen and (min-width: 701px) {
     body {
         padding: 5% 5% 0% 5%;

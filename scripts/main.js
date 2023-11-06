@@ -8,7 +8,7 @@ function getNameFromAuth() {
             userName = user.displayName;
 
             //method #1:  insert with JS
-            document.getElementById("nameGoesHere").innerText = userName;    
+            //document.getElementById("nameGoesHere").innerText = userName;    
 
             //method #2:  insert using jquery
             //$("#name-goes-here").text(userName); //using jquery
@@ -22,13 +22,27 @@ function getNameFromAuth() {
     });
 }
 getNameFromAuth(); //run the function
+
 function openForm() {
     document.getElementById("myForm").style.display = "block";
 }
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
   
-  function closeForm() {
+function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }
+
+function addFood() {
+    console.log(document.querySelector("#food").value);
+    db.collection("foods").add({
+                        name: document.querySelector("#food").value,
+                        bbDate: document.querySelector("#date").value
+                    });
+}
+
 
 function writeFoods() {
     //define a variable for the collection you want to create in Firestore to populate data
@@ -87,4 +101,4 @@ function displayCardsDynamically(collection) {
         })
 }
 
-displayCardsDynamically("foods");  //input param is the name of the collection
+//displayCardsDynamically("foods");  //input param is the name of the collection

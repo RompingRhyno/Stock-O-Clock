@@ -50,19 +50,24 @@
     </div> 
     <div class="form-popup" id="myForm">
         <form action="/action_page.php" class="form-container">
-          <h1>Add Food</h1>
-      
-          <label for="food"><b>Food</b></label>
-          <input type="text" placeholder="Enter Food" name="food" required>
-          <br><br>
-      
-          <label for="date"><b>Best Before</b></label>
-          <input type="date" placeholder="Date" name="date">
-          <br><br>
-          <div class="form-submission">
-          <button type="add" class="btn">Add</button>
-          <button type="close" class="btn cancel" onclick="closeForm()">Close</button>
-          </div>
+            <div class="close-container">
+                <span class="form-title">Add Food</span>
+                <button type="button" class="btn cancel" onclick="closeForm()">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+            </div>
+            <label for="food"><b>Food</b></label>
+            <input type="text" id="food" placeholder="Enter Food" name="food" required>
+            <br>
+            <label for="date"><b>Best Before</b></label>
+            <br>
+            <input type="date" id="date" placeholder="Date" name="date">
+            <br><br>
+            <div class="add-container">
+            <button type="submit" class="btn submit">
+                <i class="fa-solid fa-circle-plus"></i>
+            </button>
+            </div>
         </form>
     </div>
     <footer class="fixed-bottom">
@@ -71,7 +76,7 @@
             <div class="nav-icon">
                 <i class="fas fa-clipboard-list"></i>
             </div>
-            <div class="nav-shop">
+            <div class="nav-text">
                 Shopping List
             </div>
             </a>
@@ -81,7 +86,7 @@
             <div class="nav-icon">
                 <i class="fa-solid fa-toilet-portable fa-spin"></i>
             </div>
-            <div class="nav-stock">
+            <div class="nav-text">
                 Food Stock
             </div>
             </div>
@@ -91,7 +96,7 @@
             <div class="nav-icon">
                 <i class="fas fa-cog"></i>
             </div>
-            <div class="nav-setting">
+            <div class="nav-text">
                 Settings
             </div>
             </a>
@@ -106,6 +111,9 @@
     <!-- Link to scripts of your own -->
     <!-- <script src="./scripts/script.js"></script> -->
     <script src="./scripts/main.js"></script>
+    <script> $("input").on("click touch", function(){ $("footer").hide(); }); </script>
+    <script> $(".icon-button").on("click touch", function(){ $(".icon-button").hide(); }); </script>
+    <script> $(".cancel").on("click touch", function(){ $("footer, .icon-button").show(); }); </script>
 </body>
 
 </html>

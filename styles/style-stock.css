@@ -47,6 +47,9 @@ footer{
 .nav-icon {
   font-size: 15pt;
 }
+.nav-text {
+  font-size: 10pt;
+}
 .link {
   text-decoration: none;
   color: inherit;
@@ -81,20 +84,49 @@ footer{
   left: 50%;
   transform: translate(-50%, -50%);
   border: 3px solid rgb(150, 99, 49);
+  border-radius: 10px;
   z-index: 9;
   width: 80%;
 }
 .form-container {
   padding: 20px;
-  background-color: rgb(134, 163, 236);
+  background-color: rgb(162, 172, 139);
+  border: hidden;
+  border-radius: 7px;
 }
 .form-container > *{
-  padding: 5px;
+  padding: 8px;
 }
 .form-submission {
   text-align: right;
 }
-.form-submission > button {
-  border-style: solid;
-  --bs-btn-border-color: black;
+.cancel {
+  font-size: 35pt;
+  color: rgb(229, 113, 95);
+  padding: 0;
+  display:flex;
+}
+.form-title {
+  font-size: xx-large;
+  display: flex;
+  color: rgb(150, 99, 49)
+}
+.form-container > label {
+  color: 
+}
+.add-container {
+  display: flex;
+  justify-content: end;
+  padding: 0;
+}
+.submit {
+  font-size: 35pt;
+  line-height: 20pt;
+  color: rgb(150, 99, 49);
+  padding: 0;
+}
+.close-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
 }

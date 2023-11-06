@@ -47,6 +47,9 @@ footer{
 .nav-icon {
   font-size: 15pt;
 }
+.nav-text {
+  font-size: 10pt;
+}
 .link {
   text-decoration: none;
   color: inherit;

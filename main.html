@@ -15,9 +15,12 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Boostrap Library JS CDN  go here -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
 
     <!-- Other libraries go here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/59a2f7161d.js" crossorigin="anonymous"></script>
 
     <!-------------------------------------------------------->
     <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
@@ -30,12 +33,9 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
 
     <!-- Link to styles of your own -->
-    <link rel="stylesheet" href="./styles/style-stock.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/59a2f7161d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./styles/style-stock.css"> 
 
 </head>
-
 
 <body>
     <!----
@@ -82,22 +82,7 @@
             <div id="foods-go-here" class="row row-cols-auto">
             </div>
         </div>
-</div>
-    <!-- Templates for general use, not displayed -->
-    <template id="FoodCardTemplate">
-        <div class="card py-2 mx-2" style="width: 18rem">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-length">placeholder</p>
-                <br/>
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </p>
-                <a class="btn btn-primary card-href">Read more ...</a>
-            </div>
-        </div>
-    </template>
+    </div>
     <footer class="fixed-bottom">
         <div class="shop-container">
             <a class="link" href="/shoplist.html">
@@ -130,7 +115,16 @@
             </a>
         </div>  
     </footer>
-
+    <!-- Templates for general use, not displayed -->
+    <template id="foodCardTemplate">
+        <div class="card py-2 mx-2" style="width: 18rem">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-date">placeholder</p>
+                <a class="btn btn-primary card-href">Read more ...</a>
+            </div>
+        </div>
+    </template>
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->

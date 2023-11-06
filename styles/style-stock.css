@@ -54,28 +54,12 @@ footer{
   text-decoration: none;
   color: inherit;
 }
-.icon-button {
-  padding-bottom: 28%;
-  padding-left: 73%;
+.add {
+  position: fixed;
+  bottom: 15%;
+  right: 5%;
   font-size: 30pt;
   color: rgb(134, 163, 236)
-}
-.icon-button .add-btn {
-  position: absolute;
-  top: 16%;
-  left: 83%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  background-color: #55555500;
-  color: rgba(255, 255, 255, 0);
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-}
-.add-btn {
-  border-radius: 100%;
-  line-height: 40pt;
-  font-size: 10pt;
 }
 .form-popup {
   display: none;
@@ -112,7 +96,8 @@ footer{
   color: rgb(150, 99, 49)
 }
 .form-container > label {
-  color: 
+  color: rgb(150, 99, 49);
+  padding: 0;
 }
 .add-container {
   display: flex;

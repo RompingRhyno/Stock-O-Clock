@@ -44,9 +44,10 @@
     <!-- Your HTML Layout go here -->
     <!------------------------------>
     <!-- Stuff for body goes here -->
-    <div class="icon-button fixed-bottom">
-        <i class="fa-solid fa-circle-plus fa-2xl"></i>
-        <button class="add-btn" onclick="openForm()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+    <div class="add-items-container">
+        <button type="open-button" class="btn add" onclick="openForm()">
+            <i class="fa-solid fa-circle-plus fa-2xl"></i>
+        </button>
     </div> 
     <div class="form-popup" id="myForm">
         <form action="/action_page.php" class="form-container">
@@ -56,9 +57,10 @@
                     <i class="fa-solid fa-circle-xmark"></i>
                 </button>
             </div>
+            <br>
             <label for="food"><b>Food</b></label>
             <input type="text" id="food" placeholder="Enter Food" name="food" required>
-            <br>
+            <br><br>
             <label for="date"><b>Best Before</b></label>
             <br>
             <input type="date" id="date" placeholder="Date" name="date">
@@ -112,8 +114,8 @@
     <!-- <script src="./scripts/script.js"></script> -->
     <script src="./scripts/main.js"></script>
     <script> $("input").on("click touch", function(){ $("footer").hide(); }); </script>
-    <script> $(".icon-button").on("click touch", function(){ $(".icon-button").hide(); }); </script>
-    <script> $(".cancel").on("click touch", function(){ $("footer, .icon-button").show(); }); </script>
+    <script> $(".add").on("click touch", function(){ $(".add").hide(); }); </script>
+    <script> $(".cancel").on("click touch", function(){ $("footer, .add").show(); }); </script>
 </body>
 
 </html>

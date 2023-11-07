@@ -1,3 +1,14 @@
+const toggleButtonContainer = document.querySelectorAll('.toggle-button');
+const toggleButton = document.querySelectorAll('.toggle-button i');
+
+for (let i = 0; i < toggleButton.length; i++) {
+    toggleButtonContainer[i].addEventListener('click', function () {
+        toggleButton[i].classList.toggle('fa-toggle-off');
+        toggleButton[i].classList.toggle('fa-toggle-on');
+    });
+};
+
+
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
         // Check if a user is signed in:
@@ -30,7 +41,7 @@ function openForm() {
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-  
+
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }
@@ -38,9 +49,9 @@ function closeForm() {
 function addFood() {
     console.log(document.querySelector("#food").value);
     db.collection("foods").add({
-                        name: document.querySelector("#food").value,
-                        bbDate: document.querySelector("#date").value
-                    });
+        name: document.querySelector("#food").value,
+        bbDate: document.querySelector("#date").value
+    });
 }
 
 
@@ -74,12 +85,12 @@ function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("foodCardTemplate"); // Retrieve the HTML element with the ID "foodCardTemplate" and store it in the cardTemplate variable. 
 
     db.collection(collection).get()   //the collection called "foods"
-        .then(allFoods=> {
+        .then(allFoods => {
             //var i = 1;  //Optional: if you want to have a unique ID for each food
             allFoods.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
                 var bestBefore = doc.data().bbDate; //gets the "bbDate" field
-				var foodCode = doc.data().code;    //get unique ID to each food to be used for fetching right image
+                var foodCode = doc.data().code;    //get unique ID to each food to be used for fetching right image
                 var docID = doc.id;
                 let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 

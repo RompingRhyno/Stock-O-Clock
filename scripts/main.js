@@ -101,4 +101,4 @@ function displayCardsDynamically(collection) {
         })
 }
 
-//displayCardsDynamically("foods");  //input param is the name of the collection
+displayCardsDynamically("foods");  //input param is the name of the collection

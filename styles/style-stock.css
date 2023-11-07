@@ -56,11 +56,24 @@ footer{
 }
 .add {
   position: fixed;
-  bottom: 15%;
-  right: 5%;
+  bottom: 14%;
+  left: 67%;
   font-size: 30pt;
-  color: rgb(134, 163, 236)
+  /*color: rgb(136, 134, 236);*/
+  color: rgb(137, 176, 53);
+  z-index: 3;
 }
+button i:before {
+  content: "";
+  position: relative;
+  background: rgb(82, 55, 29);
+  z-index: 1;
+  border-radius: 100%;
+}
+.delete i:before {
+  background: rgba(0, 0, 0, 0);
+}
+
 .form-popup {
   display: none;
   position: fixed;
@@ -74,7 +87,7 @@ footer{
 }
 .form-container {
   padding: 20px;
-  background-color: rgb(162, 172, 139);
+  background-color: rgb(206, 188, 167);
   border: hidden;
   border-radius: 7px;
 }
@@ -86,7 +99,7 @@ footer{
 }
 .cancel {
   font-size: 35pt;
-  color: rgb(229, 113, 95);
+  color: rgb(203, 100, 84);
   padding: 0;
   display:flex;
 }
@@ -107,7 +120,7 @@ footer{
 .submit {
   font-size: 35pt;
   line-height: 20pt;
-  color: rgb(150, 99, 49);
+  color: rgb(130, 151, 92);
   padding: 0;
 }
 .close-container {
@@ -116,5 +129,31 @@ footer{
   padding: 0;
 }
 .card {
-  background-color: rgb(162, 172, 139);
+  background-color: rgb(193, 174, 124);
+  --bs-card-spacer-y: 0rem;
+  line-height: 0pt;
+}
+.btn-primary {
+  --bs-btn-bg: rgb(203, 100, 84);
+  --bs-btn-border-color: none;
+  color:rgb(193, 174, 124);
+  font-weight: bolder;
+  border-radius: 120%;
+  border-style: hidden;
+  line-height: 130%;
+}
+.food-date {
+  display: flex;
+  justify-content: space-between;
+}
+.food-date h5,
+.food-date p {
+    display: inline;
+    vertical-align: top;
+}
+.delete-container {
+  padding: 0;
+}
+.food-card {
+  padding: 0%;
 }

@@ -191,17 +191,17 @@ footer {
     font-size: 3vmin 
 }
 .firebaseui-button {
-    background-color: #ff626e !important;
+    background-color: rgb(81, 50, 17) !important;
     color: white !important;
   }
   .firebaseui-container{
-    background-color: rgb(162, 172, 139);
+    background-color: rgb(197, 171, 123);
   }
   .firebaseui-textfield.mdl-textfield .firebaseui-label:after {
-    background-color: #ff626e;
+    background-color: rgb(81, 50, 17);
   }
   .mdl-progress > .progressbar {
-    background-color: #ff626e !important;
+    background-color: rgb(81, 50, 17) !important;
   }
   
   .mdl-progress > .bufferbar {

@@ -8,7 +8,7 @@ for (let i = 0; i < toggleButton.length; i++) {
     });
 };
 
-
+var userName;
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
         // Check if a user is signed in:
@@ -16,7 +16,7 @@ function getNameFromAuth() {
             // Do something for the currently logged-in user here: 
             console.log(user.uid); //print the uid in the browser console
             console.log(user.displayName);  //print the user name in the browser console
-            var userName = user.displayName;
+            userName = user.displayName;
 
             //method #1:  insert with JS
             //document.getElementById("nameGoesHere").innerText = userName;    
@@ -51,7 +51,8 @@ function addFood() {
     var foodsRef = db.collection("foods");
     foodsRef.add({
         name: document.querySelector("#food").value,
-        bbDate: document.querySelector("#date").value
+        bbDate: document.querySelector("#date").value,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()
     });
 }
 
@@ -77,6 +78,26 @@ function writeFoods() {
         name: "Eggplant",
         bbDate: 20231110,
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+}
+
+
+function test() {
+    var user = db.collection("users").get().then(allUsers => {
+        allUsers.forEach(doc => {
+            var users = doc.id;
+            var name = doc.name;
+            if (name == userName) {
+                //console.log(users);
+                db.collection("users/" + users + "/food").get().then(allColec => {
+                    allColec.forEach(doc => {
+                        var name = doc.id;
+                        console.log(name);
+                        //console.log(userName);
+                    })
+                })
+            }
+        })
     });
 }
 //------------------------------------------------------------------------------

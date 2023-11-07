@@ -85,17 +85,31 @@ footer {
 
 .toggle-button i {
   color: rgb(150, 99, 49);
-  padding-right: 10px;
-
 }
 
 .option {
   display: flex;
-  margin-top: 5%;
   align-items: center;
 }
 
 .option span {
-  font-size: 2em;
+  font-size: 1.5em;
   padding-left: 10px
+}
+
+.card {
+  background-color: rgb(193, 174, 124);
+  --bs-card-spacer-y: 0rem;
+  line-height: 0pt;
+}
+
+.options-card {
+  padding: 0%;
+}
+
+.options-card h1 {
+  text-align: center;
+  background-color: rgb(193, 174, 124);
+  text-decoration: underline;
+  font-weight: 700;
 }

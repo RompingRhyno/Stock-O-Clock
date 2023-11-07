@@ -45,47 +45,96 @@
     <!-- Your HTML Layout go here -->
     <!------------------------------>
     <!-- Stuff for body goes here -->
-    <div class="options-container">
+    <div class="container options-card">
         <h1>Settings</h1>
-        <div class="option">
-            <span>Alert Notifications</span>
-            <div class="toggle-button">
-                <i class="fa-solid fa-toggle-off fa-5x"></i>
+        <div class="container">
+            <div class="card py-2 mx-3 mt-3">
+                <div class="card-body">
+                    <div class="option">
+                        <span>Notification Title</span>
+                        <div class="toggle-button">
+                            <i class="fa-solid fa-toggle-off fa-3x"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="option">
-            <span>Expiration Notifications</span>
-            <div class="toggle-button">
-                <i class="fa-solid fa-toggle-off fa-5x"></i>
+        <div class="container">
+            <div class="card py-2 mx-3 mt-3">
+                <div class="card-body">
+                    <div class="option">
+                        <span>Alert Notifications</span>
+                        <div class="toggle-button">
+                            <i class="fa-solid fa-toggle-off fa-3x"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="option">
-            <span>Reminders and Tips</span>
-            <div class="toggle-button">
-                <i class="fa-solid fa-toggle-off fa-5x"></i>
+        <div class="container">
+            <div class="card py-2 mx-3 mt-3">
+                <div class="card-body">
+                    <div class="option">
+                        <span>Expiration Notification</span>
+                        <div class="toggle-button">
+                            <i class="fa-solid fa-toggle-off fa-3x"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="option">
-            <span>Suggestions</span>
-            <div class="toggle-button">
-                <i class="fa-solid fa-toggle-off fa-5x"></i>
+        <div class="container">
+            <div class="card py-2 mx-3 mt-3">
+                <div class="card-body">
+                    <div class="option">
+                        <span>Reminders</span>
+                        <div class="toggle-button">
+                            <i class="fa-solid fa-toggle-off fa-3x"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="option">
-            <span>Option 5</span>
-            <div class="toggle-button">
-                <i class="fa-solid fa-toggle-off fa-5x"></i>
+        <div class="container">
+            <div class="card py-2 mx-3 mt-3">
+                <div class="card-body">
+                    <div class="option">
+                        <span>Suggestions</span>
+                        <div class="toggle-button">
+                            <i class="fa-solid fa-toggle-off fa-3x"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="option">
-            <span>Option 6</span>
-            <div class="toggle-button">
-                <i class="fa-solid fa-toggle-off fa-5x"></i>
+        <div class="container">
+            <div class="card py-2 mx-3 mt-3">
+                <div class="card-body">
+                    <div class="option">
+                        <span>Tips</span>
+                        <div class="toggle-button">
+                            <i class="fa-solid fa-toggle-off fa-3x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="card py-2 mx-3 mt-3">
+                <div class="card-body">
+                    <div class="option">
+                        <span>Option 6</span>
+                        <div class="toggle-button">
+                            <i class="fa-solid fa-toggle-off fa-3x"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -123,6 +172,21 @@
         </div>
     </footer>
 
+    <!-- Templates for general use, not displayed -->
+<template id="settingCardTemplate">
+    <div class="container">
+        <div class="card py-2 mx-3 mt-3">
+            <div class="card-body">
+                <div class="option">
+                    <span>Notification Title</span>
+                    <div class="toggle-button">
+                        <i class="fa-solid fa-toggle-off fa-3x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->

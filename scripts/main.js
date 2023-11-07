@@ -48,7 +48,8 @@ function closeForm() {
 
 function addFood() {
     console.log(document.querySelector("#food").value);
-    db.collection("foods").add({
+    var foodsRef = db.collection("foods");
+    foodsRef.add({
         name: document.querySelector("#food").value,
         bbDate: document.querySelector("#date").value
     });

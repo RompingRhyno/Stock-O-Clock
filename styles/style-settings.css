@@ -3,11 +3,13 @@
   padding: 0px;
   box-sizing: border-box;
 }
+
 body {
   background-color: #2c362a;
   font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 0px;
 }
+
 .shop-container {
   grid-area: shop;
   text-align: center;
@@ -17,6 +19,7 @@ body {
   border-top-right-radius: 10px;
   padding: 10%;
 }
+
 .stock-container {
   grid-area: stock;
   background-color: rgb(150, 99, 49);
@@ -26,6 +29,7 @@ body {
   border-top-right-radius: 10px;
   padding: 10%;
 }
+
 .setting-container {
   grid-area: setting;
   text-align: center;
@@ -33,24 +37,65 @@ body {
   background-color: rgb(150, 99, 49);
   color: tan;
 }
+
 .tab-container {
   background-color: #2c362a;
   border-style: hidden, solid, solid, solid;
   border-bottom-left-radius: 10px;
   padding: 10%;
 }
+
 footer {
-  display:grid;
+  display: grid;
   grid-template-areas: "shop stock setting";
   grid-template-columns: 1fr 1fr 1fr;
 }
+
 .nav-icon {
   font-size: 15pt;
 }
+
 .nav-text {
   font-size: 10pt;
 }
+
 .link {
   text-decoration: none;
   color: inherit;
+}
+
+.options-container {
+  height: 100vh;
+  width: 100vw;
+}
+
+.options-container h1 {
+  text-align: center;
+  font-size: 3em;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+.toggle-button {
+  grid-area: button;
+  height: 5%;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.toggle-button i {
+  color: rgb(150, 99, 49);
+  padding-right: 10px;
+
+}
+
+.option {
+  display: flex;
+  margin-top: 5%;
+  align-items: center;
+}
+
+.option span {
+  font-size: 2em;
+  padding-left: 10px
 }

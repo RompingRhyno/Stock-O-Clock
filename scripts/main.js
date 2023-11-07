@@ -97,7 +97,6 @@ function displayCardsDynamically(collection) {
                 //update title and text and image
                 newcard.querySelector('.card-title').innerHTML = title;
                 newcard.querySelector('.card-date').innerHTML = bestBefore;
-                newcard.querySelector('a').href = "eachFood.html?docID=" + docID;
 
                 //Optional: give unique ids to all elements for future use
                 // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);

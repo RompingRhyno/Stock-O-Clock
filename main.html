@@ -46,11 +46,6 @@
     <!-- Your HTML Layout go here -->
     <!------------------------------>
     <!-- Stuff for body goes here -->
-    <div class="add-items-container">
-        <button type="open-button" class="btn add" onclick="openForm()">
-            <i class="fa-solid fa-circle-plus fa-2xl"></i>
-        </button>
-    </div>
     <div class="form-popup" id="myForm">
         <form class="form-container">
             <div class="close-container">
@@ -84,18 +79,23 @@
             <br><br>
             <div class="add-container">
                 <button type="submit" class="btn submit" onclick="addFood()">
-                    <i class="fa-solid fa-circle-plus"></i>
+                    <i class="fa-solid fa-circle-plus bgadd"></i>
                 </button>
             </div>
         </form>
     </div>
-    <div class="container">
+    <div class="container food-card">
         <h1>Foods</h1>
         <!-- Here is the container for cards  -->
         <div class="container">
             <div id="foods-go-here" class="row row-cols-auto">
             </div>
         </div>
+    </div>
+    <div class="add-items-container">
+        <button type="open-button" class="btn add" onclick="openForm()">
+            <i id="icon-bg" class="fa-solid fa-circle-plus fa-2xl"></i>
+        </button>
     </div>
     <footer class="fixed-bottom">
         <div class="shop-container">
@@ -131,15 +131,20 @@
     </footer>
     <!-- Templates for general use, not displayed -->
     <template id="foodCardTemplate">
-        <div class="card py-2 mx-2 mt-3" style="width: 18rem">
+        <div class="card py-2 mx-3 mt-3" style="width: 90vw">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-date">placeholder</p>
-                <a class="btn btn-primary card-href">x</a>
+                <div class="food-date">
+                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-date">placeholder</h5>
+                </div>
+                <div class="-container delete-container">
+                    <button type="button" class="btn delete">
+                        <i class="fa-solid fa-trash-can trash"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </template>
-
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->

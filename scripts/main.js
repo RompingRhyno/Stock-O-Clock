@@ -123,33 +123,77 @@ function test() {
         })
     });
 }
-
+//NOT FUNCTIONING YET. TRYING TO SORT DATA WITH ARRAY.sort
+/*
+// Store database as an array for sorting
 function getFoods() {
     var dataArray = [];
+    var foodsRef = db.collection("foods");
+    
 
     // Loop through the documents in the collection
     foodsRef.get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
+    querySnapshot.forEach(function(foods) {
     // Get the data from each document
-    var data = doc.data();
-    
-    // Extract the specific fields you want and store them in the array
-    var field1 = data.field1;
-    var field2 = data.field2;
+    var data = foods.data();
 
-    dataArray.push({ field1, field2 });
-  });
+    var bestBefore = foods.data().bbDate;
+    // Create current Date object
+    var currentDate = new Date();
+    // Create best before date object
+    var dateObject = new Date(bestBefore);
+    // Calculate the days left
+    var timeDifference = dateObject - currentDate;
+    var millisecondsInADay = 1000 * 60 * 60 * 24;
+    var daysDifference = Math.floor(timeDifference / millisecondsInADay);
+
+    // Extract the specific fields you want and store them in the array
+    var name = data.name;
+    var daysLeft = daysDifference;
+
+    dataArray.push({name, daysDifference});
+    });
 
   // The dataArray now contains the extracted data
-  console.log(dataArray);
+
+  
 });
+dataArray.sort(function(a, b) {
+    return a.daysDifference - b.daysDifference;
+  });
+  console.log(dataArray);
+// Sort the cards based on the days (ascending order)
+
+  // Function to display the sorted cards
+  function displaySortedCards() {
+    var foodCardTemplate = document.getElementById('foodCardTemplate');
+    var cardContainer = document.getElementById("foods-go-here");
+    dataArray.forEach(function(food) {
+        let newcard = foodCardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
+        newcard.querySelector('.card-title').innerHTML = title;
+                if (daysDifference >= 0) {
+                    newcard.querySelector('.card-date').innerHTML = daysDifference + " days left";
+                } else if (daysDifference < 0) {
+                    newcard.querySelector('.card-date').innerHTML = "Expired by " + ((-1) * daysDifference) + " days";
+                } else if (bestBefore = " ") {
+                    newcard.querySelector('.card-date').innerHTML = "Click to add date";
+                }
+        document.getElementById("foods-go-here").appendChild(newcard);
+      var cardElement = createCardElement(card.title, card.date);
+      cardContainer.appendChild(cardElement);
+    });
+  }
+  
+  // Call the function to display the sorted cards
+  displaySortedCards();
 }
+getFoods();
+*/
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("foodCardTemplate"); // Retrieve the HTML element with the ID "foodCardTemplate" and store it in the cardTemplate variable. 
-
     db.collection(collection).get()   //the collection called "foods"
         .then(allFoods => {
             //var i = 1;  //Optional: if you want to have a unique ID for each food
@@ -165,15 +209,17 @@ function displayCardsDynamically(collection) {
 
                 // Convert the date string to a Date object
                 var dateObject = new Date(bestBefore);
-                
+                // Create current Date object
                 var currentDate = new Date();
+                // Calculate the days left
                 var timeDifference = dateObject - currentDate;
                 var millisecondsInADay = 1000 * 60 * 60 * 24;
                 var daysDifference = Math.floor(timeDifference / millisecondsInADay);
+                // Calculate the days past expiry
                 var negTimeDifference = currentDate - dateObject;
                 var negDaysDifference = Math.floor(negTimeDifference / millisecondsInADay) * (-1);
                 
-                //update title and text and image
+                // Update food name and days left on card
                 newcard.querySelector('.card-title').innerHTML = title;
                 if (daysDifference >= 0) {
                     newcard.querySelector('.card-date').innerHTML = daysDifference + " days left";
@@ -196,4 +242,4 @@ function displayCardsDynamically(collection) {
         })
 }
 
-displayCardsDynamically("foods");  //input param is the name of the collection
+displayCardsDynamically("foods");  //input param is the name of the collection*/

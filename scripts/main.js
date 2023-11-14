@@ -124,7 +124,7 @@ function test() {
     });
 }
 //NOT FUNCTIONING YET. TRYING TO SORT DATA WITH ARRAY.sort
-/*
+
 // Store database as an array for sorting
 function getFoods() {
     var dataArray = [];
@@ -155,13 +155,29 @@ function getFoods() {
     });
 
   // The dataArray now contains the extracted data
-
+  //console.log(dataArray[0].daysDifference);
   
-});
-dataArray.sort(function(a, b) {
-    return a.daysDifference - b.daysDifference;
-  });
-  console.log(dataArray);
+    });
+
+    function sort(a, b) {
+        if (a < b) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+
+    //console.log(sort(5, 10));
+    let sorted = true;
+    //while(sorted) {
+    for(let i = 0; i < dataArray.length - 1; i++) {
+        let a = dataArray[i].daysDifference;
+        let b = dataArray[i + 1].daysDifference;
+        
+        console.log(a);
+        sorted = false;
+    }
+    //}
 // Sort the cards based on the days (ascending order)
 
   // Function to display the sorted cards
@@ -188,10 +204,11 @@ dataArray.sort(function(a, b) {
   displaySortedCards();
 }
 getFoods();
-*/
+
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
+/*
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("foodCardTemplate"); // Retrieve the HTML element with the ID "foodCardTemplate" and store it in the cardTemplate variable. 
     db.collection(collection).get()   //the collection called "foods"
@@ -241,5 +258,6 @@ function displayCardsDynamically(collection) {
             })
         })
 }
+
 
 displayCardsDynamically("foods");  //input param is the name of the collection*/

@@ -1,10 +1,12 @@
 var userName;
+var userId;
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
         // Check if a user is signed in:
         if (user) {
             // Do something for the currently logged-in user here: 
             console.log(user.uid); //print the uid in the browser console
+            userId = user.uid;
             console.log(user.displayName);  //print the user name in the browser console
             userName = user.displayName;
             // Split the string into words using a space as the delimiter
@@ -26,6 +28,14 @@ function getNameFromAuth() {
     });
 }
 getNameFromAuth(); //run the function
+
+function getUser() {
+    firebase.auth(user => {
+        if(user) {
+            return user.uid;
+        }
+    })
+}
 
 function openForm() {
     document.getElementById("myForm").style.display = "block";
@@ -64,11 +74,12 @@ document.getElementById('numberChoice').addEventListener('change', function () {
         this.selectedIndex = -1;
     }
 });
+
 // Write food info from form to firebase
 var stockForm = document.getElementById('myForm');
 stockForm.addEventListener('submit', function (e) {
     console.log("food added");
-    var foodsRef = db.collection("foods");
+    var foodsRef = db.collection("users").doc(userId).collection("food");
     foodsRef.add({
         name: document.getElementById("food").value,
         bbDate: document.getElementById("date").value,
@@ -199,7 +210,7 @@ function getFoods() {
     var foodCardTemplate = document.getElementById('foodCardTemplate');
     var cardContainer = document.getElementById("foods-go-here");
     dataArray.forEach(function(food) {
-        db.collection("foods").orderBy("bbDate").get()
+        db.collection("users").doc(userId).collection("food").orderBy("bbDate").get()
         .then(allFood => {
             allFood.forEach(doc => {
                 let newcard = foodCardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.

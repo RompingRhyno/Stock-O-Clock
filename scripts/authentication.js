@@ -42,7 +42,6 @@ var uiConfig = {
             });
             
             db.collection("users").doc(user.uid).collection("food").doc("food").set({
-              test : "Something"
 
             }).then(function () {
                    console.log("New user added to firestore");

@@ -180,30 +180,18 @@ function getFoods() {
     dataArray.push({name, daysDifference});
     });
 
-  // The dataArray now contains the extracted data
-  //console.log(dataArray[0].daysDifference);
-  
+    function sort() {
+        db.collection("foods").orderBy("bbDate").get()
+        .then(allFood => {
+            allFood.forEach(doc => {
+                console.log(doc.data().bbDate);
+            })
+        })
+    }
+
     });
-
-    function sort(a, b) {
-        if (a < b) {
-            return a;
-        } else {
-            return b;
-        }
-    }
-
-    //console.log(sort(5, 10));
-    let sorted = true;
-    //while(sorted) {
-    for(let i = 0; i < dataArray.length - 1; i++) {
-        let a = dataArray[i].daysDifference;
-        let b = dataArray[i + 1].daysDifference;
-        
-        console.log(a);
-        sorted = false;
-    }
-    //}
+  
+    
 // Sort the cards based on the days (ascending order)
 
   // Function to display the sorted cards

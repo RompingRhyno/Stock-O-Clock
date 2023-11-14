@@ -1,14 +1,3 @@
-// Settings toggles
-const toggleButtonContainer = document.querySelectorAll('.toggle-button');
-const toggleButton = document.querySelectorAll('.toggle-button i');
-
-for (let i = 0; i < toggleButton.length; i++) {
-    toggleButtonContainer[i].addEventListener('click', function () {
-        toggleButton[i].classList.toggle('fa-toggle-off');
-        toggleButton[i].classList.toggle('fa-toggle-on');
-    });
-};
-
 var userName;
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
@@ -49,31 +38,31 @@ function sleep(ms) {
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
     document.getElementById('food').value = '',
-    document.getElementById('date').value = '';
+        document.getElementById('date').value = '';
     document.getElementById('numberChoice').selectedIndex = 0;
 }
 // Dropdown form selections loop
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var numberChoice = document.getElementById('numberChoice');
-    
+
     // Generate options for numbers from 1 to 30
     for (var i = 1; i <= 30; i++) {
-      var option = document.createElement('option');
-      option.value = i;
-      option.text = i;
-      numberChoice.appendChild(option);
+        var option = document.createElement('option');
+        option.value = i;
+        option.text = i;
+        numberChoice.appendChild(option);
     }
     document.getElementById('myForm').addEventListener('submit', function (e) {
-      e.preventDefault(); // Prevent the default form submission
-      var selectedNumber = document.getElementById('numberChoice').value;
+        e.preventDefault(); // Prevent the default form submission
+        var selectedNumber = document.getElementById('numberChoice').value;
     });
 });
 
 // Days placeholder for dropdown form input
 document.getElementById('numberChoice').addEventListener('change', function () {
-  if (this.value === "") {
-    this.selectedIndex = -1;
-  }
+    if (this.value === "") {
+        this.selectedIndex = -1;
+    }
 });
 // Write food info from form to firebase
 var stockForm = document.getElementById('myForm');
@@ -85,24 +74,61 @@ stockForm.addEventListener('submit', function (e) {
         bbDate: document.getElementById("date").value,
         last_updated: firebase.firestore.FieldValue.serverTimestamp()
     })
-    .then(function (docRef) {
-        console.log('Document written with ID: ', docRef.id);
-        
-        // Reload the page after the write is successful
-        location.reload(); // This will trigger a page refresh
-      })
-      .catch(function (error) {
-        console.error('Error adding document: ', error);
-      });
+        .then(function (docRef) {
+            console.log('Document written with ID: ', docRef.id);
+
+            // Reload the page after the write is successful
+            location.reload(); // This will trigger a page refresh
+        })
+        .catch(function (error) {
+            console.error('Error adding document: ', error);
+        });
     // Clear the form fields
     document.getElementById('food').value = '',
-    document.getElementById('date').value = '';
+        document.getElementById('date').value = '';
     document.getElementById('numberChoice').selectedIndex = 0;
     closeForm();
 });
-function deleteFood() {
-    console.log("food deleted");
 
+//Delete Food Card
+let foodDocument = [];
+
+db.collection("foods").get().then(function (querySnapshot) {
+    querySnapshot.forEach(function (doc) {
+        var d = String(doc.id);
+        foodDocument.push(d);
+        console.log(foodDocument);
+
+    })
+})
+
+function deleteFood() {
+
+    // let foodDocument = [];
+
+    // db.collection("foods").get().then(function (querySnapshot) {
+    //     querySnapshot.forEach(function (doc) {
+    //         var d = String(doc.id);
+    //         foodDocument.push(d);
+    //         console.log(foodDocument);
+
+    //     })
+    // })
+
+    const g = document.querySelectorAll('.delete');
+    for (let i = 0, len = g.length; i < len; i++) {
+        g[i].onclick = function () {
+            let x = [i];
+
+            db.collection("foods").doc(foodDocument[x]).delete().then(() => {
+                console.log("Document successfully deleted!");
+            }).catch((error) => {
+                console.error("Error removing document: ", error);
+            });
+
+            alert("food deleted");
+        }
+    }
 }
 
 function test() {
@@ -235,7 +261,7 @@ function displayCardsDynamically(collection) {
                 // Calculate the days past expiry
                 var negTimeDifference = currentDate - dateObject;
                 var negDaysDifference = Math.floor(negTimeDifference / millisecondsInADay) * (-1);
-                
+
                 // Update food name and days left on card
                 newcard.querySelector('.card-title').innerHTML = title;
                 if (daysDifference >= 0) {

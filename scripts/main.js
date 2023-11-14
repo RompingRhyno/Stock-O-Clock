@@ -97,7 +97,7 @@ db.collection("foods").get().then(function (querySnapshot) {
     querySnapshot.forEach(function (doc) {
         var d = String(doc.id);
         foodDocument.push(d);
-        console.log(foodDocument);
+        //console.log(foodDocument);
 
     })
 })
@@ -179,7 +179,7 @@ function getFoods() {
 
     dataArray.push({name, daysDifference});
     });
-
+/*
     function sort() {
         db.collection("foods").orderBy("bbDate").get()
         .then(allFood => {
@@ -188,7 +188,7 @@ function getFoods() {
             })
         })
     }
-
+*/
     });
   
     
@@ -199,18 +199,24 @@ function getFoods() {
     var foodCardTemplate = document.getElementById('foodCardTemplate');
     var cardContainer = document.getElementById("foods-go-here");
     dataArray.forEach(function(food) {
-        let newcard = foodCardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
-        newcard.querySelector('.card-title').innerHTML = title;
+        db.collection("foods").orderBy("bbDate").get()
+        .then(allFood => {
+            allFood.forEach(doc => {
+                let newcard = foodCardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
+                newcard.querySelector('.card-title').innerHTML = doc.data().name;
+                var currentDate = new Date();
                 if (daysDifference >= 0) {
-                    newcard.querySelector('.card-date').innerHTML = daysDifference + " days left";
+                    newcard.querySelector('.card-date').innerHTML = doc.data().bbDate - currentDate + " days left";
                 } else if (daysDifference < 0) {
-                    newcard.querySelector('.card-date').innerHTML = "Expired by " + ((-1) * daysDifference) + " days";
+                    newcard.querySelector('.card-date').innerHTML = "Expired by " + ((-1) * doc.data().bbDate - currentDate) + " days";
                 } else if (bestBefore = " ") {
                     newcard.querySelector('.card-date').innerHTML = "Click to add date";
-                }
-        document.getElementById("foods-go-here").appendChild(newcard);
-      var cardElement = createCardElement(card.title, card.date);
-      cardContainer.appendChild(cardElement);
+                }   
+                document.getElementById("foods-go-here").appendChild(newcard);
+                var cardElement = createCardElement(card.title, card.date);
+                cardContainer.appendChild(cardElement);
+            })
+        })
     });
   }
   

@@ -64,7 +64,7 @@ document.getElementById('numberChoice').addEventListener('change', function () {
         this.selectedIndex = -1;
     }
 });
-// Write food info from form to firebase
+// Write form info to firebase
 var stockForm = document.getElementById('myForm');
 stockForm.addEventListener('submit', function (e) {
     console.log("food added");

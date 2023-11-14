@@ -22,6 +22,30 @@ var uiConfig = {
                    email: user.email,                         //with authenticated user's ID (user.uid)
             }).then(function () {
                    console.log("New user added to firestore");
+                   //xwindow.location.assign("main.html");       //re-direct to main.html after signup
+            }).catch(function (error) {
+                   console.log("Error adding new user: " + error);
+            });
+
+            db.collection("users").doc(user.uid).collection("settings").doc("settings").set({
+                   notification : false,
+                   alertNotification : false,
+                   expirationNotification : false,
+                   reminder : false,
+                   suggestion : false,
+                   tip : false
+            }).then(function () {
+                   console.log("New user added to firestore");
+                   //window.location.assign("main.html");       //re-direct to main.html after signup
+            }).catch(function (error) {
+                   console.log("Error adding new user: " + error);
+            });
+            
+            db.collection("users").doc(user.uid).collection("food").doc("food").set({
+              test : "Something"
+
+            }).then(function () {
+                   console.log("New user added to firestore");
                    window.location.assign("main.html");       //re-direct to main.html after signup
             }).catch(function (error) {
                    console.log("Error adding new user: " + error);

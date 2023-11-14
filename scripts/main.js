@@ -90,18 +90,30 @@ stockForm.addEventListener('submit', function (e) {
     closeForm();
 });
 
+//Delete Food Card
+let foodDocument = [];
+
+db.collection("foods").get().then(function (querySnapshot) {
+    querySnapshot.forEach(function (doc) {
+        var d = String(doc.id);
+        foodDocument.push(d);
+        console.log(foodDocument);
+
+    })
+})
+
 function deleteFood() {
 
-    let foodDocument = [];
+    // let foodDocument = [];
 
-    db.collection("foods").get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-            var d = String(doc.id);
-            foodDocument.push(d);
-            console.log(foodDocument);
+    // db.collection("foods").get().then(function (querySnapshot) {
+    //     querySnapshot.forEach(function (doc) {
+    //         var d = String(doc.id);
+    //         foodDocument.push(d);
+    //         console.log(foodDocument);
 
-        })
-    })
+    //     })
+    // })
 
     const g = document.querySelectorAll('.delete');
     for (let i = 0, len = g.length; i < len; i++) {
@@ -114,18 +126,9 @@ function deleteFood() {
                 console.error("Error removing document: ", error);
             });
 
-            console.log("food deleted");
+            alert("food deleted");
         }
     }
-
-    // db.collection("foods").doc("5zSkSgObtziaBsuAvwWt").delete().then(() => {
-    //     console.log("Document successfully deleted!");
-    // }).catch((error) => {
-    //     console.error("Error removing document: ", error);
-    // });
-
-    // console.log("food deleted");
-
 }
 
 function test() {

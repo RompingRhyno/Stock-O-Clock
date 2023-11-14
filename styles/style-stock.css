@@ -7,6 +7,7 @@ body {
   background-color: #2c362a;
   font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 0px;
+  margin-top: 3%;
 }
 .shop-container {
   grid-area: shop;
@@ -22,6 +23,9 @@ body {
   background-color: rgb(150, 99, 49);
   text-align: center;
   color: tan;
+  border-style: hidden;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 .setting-container {
   grid-area: setting;
@@ -34,10 +38,10 @@ body {
 }
 .tab-container {
   background-color: #2c362a;
-  border-style: hidden, solid, solid, solid;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
   padding:10%;
+  border-style: hidden;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 footer{
   display:grid;
@@ -156,4 +160,25 @@ button i:before {
 }
 .food-card {
   padding: 0%;
+}
+.row {
+  justify-content: center;
+}
+.container.food-card {
+  padding-bottom: 250px;
+}
+#numberChoice {
+  padding: 11.9px;
+  overflow-y: auto;
+}
+h1{
+  color: rgb(150, 99, 49);
+  text-align: center;
+}
+#daysDropdown {
+  max-height: 100px; /* Set a maximum height for the dropdown */
+  overflow-y: auto; /* Enable vertical scrolling when needed */
+}
+#daysDropdown option[value=""] {
+  display: none;
 }

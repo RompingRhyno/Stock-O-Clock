@@ -131,24 +131,6 @@ function deleteFood() {
     }
 }
 
-function test() {
-    var user = db.collection("users").get().then(allUsers => {
-        allUsers.forEach(doc => {
-            var users = doc.id;
-            var name = doc.name;
-            if (name == userName) {
-                //console.log(users);
-                db.collection("users/" + users + "/food").get().then(allColec => {
-                    allColec.forEach(doc => {
-                        var name = doc.id;
-                        console.log(name);
-                        //console.log(userName);
-                    })
-                })
-            }
-        })
-    });
-}
 //NOT FUNCTIONING YET. TRYING TO SORT DATA WITH ARRAY.sort
 
 // Store database as an array for sorting

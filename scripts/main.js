@@ -140,7 +140,7 @@ function deleteFood() {
     }
 }
 
-//NOT FUNCTIONING YET. TRYING TO SORT DATA WITH ARRAY.sort
+/*NOT FUNCTIONING YET. TRYING TO SORT DATA WITH ARRAY.sort
 
 // Store database as an array for sorting
 function getFoods() {
@@ -179,9 +179,9 @@ function getFoods() {
             })
         })
     }
-*/
+
     });
-  
+ 
     
 // Sort the cards based on the days (ascending order)
 
@@ -215,7 +215,7 @@ function getFoods() {
   displaySortedCards();
 }
 getFoods();
-
+*/
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------

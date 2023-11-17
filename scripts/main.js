@@ -111,33 +111,30 @@ db.collection("foods").get().then(function (querySnapshot) {
     })
 })
 
-function deleteFood() {
 
-    // let foodDocument = [];
+// Function to delete a document from Firestore
+function deleteDocument(docId) {
+    return db.collection("users").doc(userId).collection("food").doc(docId).delete();
+}
 
-    // db.collection("foods").get().then(function (querySnapshot) {
-    //     querySnapshot.forEach(function (doc) {
-    //         var d = String(doc.id);
-    //         foodDocument.push(d);
-    //         console.log(foodDocument);
+// Function to handle the delete button click event
+function deleteFood(event) {
+    // Get the card element
+    var card = event.target.closest('.card');
 
-    //     })
-    // })
+    // Extract any necessary information from the card (e.g., document ID)
+    var docId = card.getAttribute('data-doc-id');
 
-    const g = document.querySelectorAll('.delete');
-    for (let i = 0, len = g.length; i < len; i++) {
-        g[i].onclick = function () {
-            let x = [i];
-
-            db.collection("user").doc(userId).collection("food").doc(foodDocument[x]).delete().then(() => {
-                console.log("Document successfully deleted!");
-            }).catch((error) => {
-                console.error("Error removing document: ", error);
-            });
-
-            alert("food deleted");
-        }
-    }
+    // Call the function to delete the document from Firestore
+    deleteDocument(docId)
+        .then(() => {
+            console.log('Document deleted successfully');
+            // Optionally, update the UI to remove the deleted card
+            card.remove();
+        })
+        .catch(error => {
+            console.error('Error deleting document:', error);
+        });
 }
 
 /*NOT FUNCTIONING YET. TRYING TO SORT DATA WITH ARRAY.sort
@@ -228,12 +225,10 @@ function displayCardsDynamically(collection) {
             console.log("firestore query success");
             //var i = 1;  //Optional: if you want to have a unique ID for each food
             allFoods.forEach(doc => { //iterate thru each doc
-                console.log("Inside forEach Loop");
-                console.log("Firestore Document Data:", doc.data());
                 var title = doc.data().name;       // get value of the "name" key
                 var bestBefore = doc.data().bbDate; //gets the "bbDate" field
                 //var foodCode = doc.data().code;    //get unique ID to each food to be used for fetching right image
-                //var docID = doc.id;
+                var docID = doc.id;
                 //Calculate the days remaining
                 // Convert the date string to a Date object
                 var dateObject = new Date(bestBefore);
@@ -246,10 +241,12 @@ function displayCardsDynamically(collection) {
                 // Calculate the days past expiry
                 var negTimeDifference = currentDate - dateObject;
                 var negDaysDifference = Math.floor(negTimeDifference / millisecondsInADay) * (-1);
-                let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
+                let newcard = cardTemplate.content.cloneNode(true).firstElementChild; // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
                 // Update food name and days left on card
                 newcard.querySelector('.card-title').innerHTML = title;
+                console.log(doc.id);
+                newcard.setAttribute('data-doc-id', doc.id);    
                 if (daysDifference >= 0) {
                     newcard.querySelector('.card-date').innerHTML = daysDifference + " days left";
                 } else if (daysDifference < 0) {

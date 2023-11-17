@@ -222,19 +222,19 @@ getFoods();
 
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("foodCardTemplate"); // Retrieve the HTML element with the ID "foodCardTemplate" and store it in the cardTemplate variable. 
+    console.log("Before Firestore Query");
     db.collection(collection).doc(userId).collection("food").get()   //the collection called "foods"
         .then(allFoods => {
+            console.log("firestore query success");
             //var i = 1;  //Optional: if you want to have a unique ID for each food
             allFoods.forEach(doc => { //iterate thru each doc
+                console.log("Inside forEach Loop");
+                console.log("Firestore Document Data:", doc.data());
                 var title = doc.data().name;       // get value of the "name" key
-                //var bestBefore = doc.data().bbDate; //gets the "bbDate" field
+                var bestBefore = doc.data().bbDate; //gets the "bbDate" field
                 //var foodCode = doc.data().code;    //get unique ID to each food to be used for fetching right image
                 //var docID = doc.id;
-                let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
-
                 //Calculate the days remaining
-                var bestBefore = doc.data().bbDate;
-
                 // Convert the date string to a Date object
                 var dateObject = new Date(bestBefore);
                 // Create current Date object
@@ -246,6 +246,7 @@ function displayCardsDynamically(collection) {
                 // Calculate the days past expiry
                 var negTimeDifference = currentDate - dateObject;
                 var negDaysDifference = Math.floor(negTimeDifference / millisecondsInADay) * (-1);
+                let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
                 // Update food name and days left on card
                 newcard.querySelector('.card-title').innerHTML = title;
@@ -253,7 +254,7 @@ function displayCardsDynamically(collection) {
                     newcard.querySelector('.card-date').innerHTML = daysDifference + " days left";
                 } else if (daysDifference < 0) {
                     newcard.querySelector('.card-date').innerHTML = "Expired by " + ((-1) * negDaysDifference) + " days";
-                } else if (bestBefore = " ") {
+                } else if (bestBefore == "") {
                     newcard.querySelector('.card-date').innerHTML = "Click to add date";
                 }
 
@@ -270,6 +271,6 @@ function displayCardsDynamically(collection) {
             })
         })
 }
-
-
-displayCardsDynamically("users");  //input param is the name of the collection*/
+window.setTimeout(function() {
+    displayCardsDynamically("users");
+}, 500);  // Adjust the delay time as needed

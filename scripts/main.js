@@ -129,7 +129,7 @@ function deleteFood() {
         g[i].onclick = function () {
             let x = [i];
 
-            db.collection("user").doc(userId).collection("food").doc(foodDocument[x]).delete().then(() => {
+            db.collection("foods").doc(foodDocument[x]).delete().then(() => {
                 console.log("Document successfully deleted!");
             }).catch((error) => {
                 console.error("Error removing document: ", error);
@@ -263,8 +263,7 @@ function displayCardsDynamically(collection) {
                 // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
                 //attach to gallery, Example: "foods-go-here"
-                //console.log(newCard);
-                document.getElementById("foods-go-here").appendChild(newcard);
+                document.getElementById(collection + "-go-here").appendChild(newcard);
 
                 //i++;   //Optional: iterate variable to serve as unique ID
             })
@@ -272,4 +271,4 @@ function displayCardsDynamically(collection) {
 }
 
 
-displayCardsDynamically("food");  //input param is the name of the collection*/
+displayCardsDynamically("users");  //input param is the name of the collection*/

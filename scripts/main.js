@@ -1,5 +1,6 @@
 var userName;
 var userId;
+var userFridges;
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
         // Check if a user is signed in:
@@ -9,6 +10,8 @@ function getNameFromAuth() {
             userId = user.uid;
             console.log(user.displayName);  //print the user name in the browser console
             userName = user.displayName;
+            console.log(user);
+            userFridges = user.fridges;
             // Split the string into words using a space as the delimiter
             var name = user.displayName.split(" ");
             // Get the first word (index 0)
@@ -139,10 +142,10 @@ function deleteFood(event) {
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
 
-function displayCardsDynamically(collection) {
+function displayCardsDynamically() {
     let cardTemplate = document.getElementById("foodCardTemplate"); // Retrieve the HTML element with the ID "foodCardTemplate" and store it in the cardTemplate variable. 
     console.log("Before Firestore Query");
-    db.collection(collection).doc(userId).collection("food").orderBy("bbDate").get()   //the collection called "foods"
+    db.collection("users").doc(userId).collection("food").orderBy("bbDate").get()   //the collection called "foods"
         .then(allFoods => {
             console.log("firestore query success");
             //var i = 1;  //Optional: if you want to have a unique ID for each food
@@ -191,5 +194,5 @@ function displayCardsDynamically(collection) {
         })
 }
 window.setTimeout(function() {
-    displayCardsDynamically("users");
-}, 500);  // Adjust the delay time as needed
+    displayCardsDynamically();
+}, 250);  // Adjust the delay time as needed

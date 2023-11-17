@@ -81,8 +81,7 @@ stockForm.addEventListener('submit', function (e) {
     var foodsRef = db.collection("users").doc(userId).collection("food");
     foodsRef.add({
         name: document.getElementById("food").value,
-        bbDate: document.getElementById("date").value,
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()
+        bbDate: document.getElementById("date").value
     })
         .then(function (docRef) {
             console.log('Document written with ID: ', docRef.id);

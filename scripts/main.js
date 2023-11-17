@@ -147,7 +147,6 @@ function displayCardsDynamically() {
     console.log("Before Firestore Query");
     db.collection("users").doc(userId).collection("food").orderBy("bbDate").get()   //the collection called "foods"
         .then(allFoods => {
-            console.log("firestore query success");
             //var i = 1;  //Optional: if you want to have a unique ID for each food
             allFoods.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key

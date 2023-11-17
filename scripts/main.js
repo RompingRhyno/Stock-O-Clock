@@ -135,7 +135,7 @@ function deleteFood() {
                 console.error("Error removing document: ", error);
             });
 
-            alert("food deleted");
+            //alert("food deleted");
         }
     }
 }
@@ -222,7 +222,7 @@ getFoods();
 
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("foodCardTemplate"); // Retrieve the HTML element with the ID "foodCardTemplate" and store it in the cardTemplate variable. 
-    db.collection(collection).doc(userId).collection("food").get()   //the collection called "foods"
+    db.collection(collection).doc(userId).collection("food").orderBy("bbDate").get()   //the collection called "foods"
         .then(allFoods => {
             //var i = 1;  //Optional: if you want to have a unique ID for each food
             allFoods.forEach(doc => { //iterate thru each doc
@@ -271,5 +271,7 @@ function displayCardsDynamically(collection) {
         })
 }
 
-
-displayCardsDynamically("users");  //input param is the name of the collection*/
+window.setTimeout(function() {
+    displayCardsDynamically("users");
+}, 500);
+  //input param is the name of the collection*/

@@ -85,7 +85,6 @@ stockForm.addEventListener('submit', function (e) {
     })
         .then(function (docRef) {
             console.log('Document written with ID: ', docRef.id);
-
             // Reload the page after the write is successful
             location.reload(); // This will trigger a page refresh
         })
@@ -111,130 +110,48 @@ db.collection("foods").get().then(function (querySnapshot) {
     })
 })
 
-function deleteFood() {
 
-    // let foodDocument = [];
-
-    // db.collection("foods").get().then(function (querySnapshot) {
-    //     querySnapshot.forEach(function (doc) {
-    //         var d = String(doc.id);
-    //         foodDocument.push(d);
-    //         console.log(foodDocument);
-
-    //     })
-    // })
-
-    const g = document.querySelectorAll('.delete');
-    for (let i = 0, len = g.length; i < len; i++) {
-        g[i].onclick = function () {
-            let x = [i];
-
-            db.collection("user").doc(userId).collection("food").doc(foodDocument[x]).delete().then(() => {
-                console.log("Document successfully deleted!");
-            }).catch((error) => {
-                console.error("Error removing document: ", error);
-            });
-
-            //alert("food deleted");
-        }
-    }
+// Function to delete a document from Firestore
+function deleteDocument(docId) {
+    return db.collection("users").doc(userId).collection("food").doc(docId).delete();
 }
 
-/*NOT FUNCTIONING YET. TRYING TO SORT DATA WITH ARRAY.sort
+// Function to handle the delete button click event
+function deleteFood(event) {
+    // Get the card element
+    var card = event.target.closest('.card');
 
-// Store database as an array for sorting
-function getFoods() {
-    var dataArray = [];
-    var foodsRef = db.collection("foods");
-    
+    // Extract any necessary information from the card (e.g., document ID)
+    var docId = card.getAttribute('data-doc-id');
 
-    // Loop through the documents in the collection
-    foodsRef.get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(foods) {
-    // Get the data from each document
-    var data = foods.data();
-
-    var bestBefore = foods.data().bbDate;
-    // Create current Date object
-    var currentDate = new Date();
-    // Create best before date object
-    var dateObject = new Date(bestBefore);
-    // Calculate the days left
-    var timeDifference = dateObject - currentDate;
-    var millisecondsInADay = 1000 * 60 * 60 * 24;
-    var daysDifference = Math.floor(timeDifference / millisecondsInADay);
-
-    // Extract the specific fields you want and store them in the array
-    var name = data.name;
-    var daysLeft = daysDifference;
-
-    dataArray.push({name, daysDifference});
-    });
-/*
-    function sort() {
-        db.collection("foods").orderBy("bbDate").get()
-        .then(allFood => {
-            allFood.forEach(doc => {
-                console.log(doc.data().bbDate);
-            })
+    // Call the function to delete the document from Firestore
+    deleteDocument(docId)
+        .then(() => {
+            console.log('Document deleted successfully');
+            // Optionally, update the UI to remove the deleted card
+            card.remove();
         })
-    }
-
-    });
- 
-    
-// Sort the cards based on the days (ascending order)
-
-  // Function to display the sorted cards
-  function displaySortedCards() {
-    var foodCardTemplate = document.getElementById('foodCardTemplate');
-    var cardContainer = document.getElementById("foods-go-here");
-    dataArray.forEach(function(food) {
-        db.collection("users").doc(userId).collection("food").orderBy("bbDate").get()
-        .then(allFood => {
-            allFood.forEach(doc => {
-                let newcard = foodCardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
-                newcard.querySelector('.card-title').innerHTML = doc.data().name;
-                var currentDate = new Date();
-                if (daysDifference >= 0) {
-                    newcard.querySelector('.card-date').innerHTML = doc.data().bbDate - currentDate + " days left";
-                } else if (daysDifference < 0) {
-                    newcard.querySelector('.card-date').innerHTML = "Expired by " + ((-1) * doc.data().bbDate - currentDate) + " days";
-                } else if (bestBefore = " ") {
-                    newcard.querySelector('.card-date').innerHTML = "Click to add date";
-                }   
-                document.getElementById("foods-go-here").appendChild(newcard);
-                var cardElement = createCardElement(card.title, card.date);
-                cardContainer.appendChild(cardElement);
-            })
-        })
-    });
-  }
-  
-  // Call the function to display the sorted cards
-  displaySortedCards();
+        .catch(error => {
+            console.error('Error deleting document:', error);
+        });
 }
-getFoods();
-*/
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
 
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("foodCardTemplate"); // Retrieve the HTML element with the ID "foodCardTemplate" and store it in the cardTemplate variable. 
+    console.log("Before Firestore Query");
     db.collection(collection).doc(userId).collection("food").orderBy("bbDate").get()   //the collection called "foods"
         .then(allFoods => {
+            console.log("firestore query success");
             //var i = 1;  //Optional: if you want to have a unique ID for each food
             allFoods.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
-                //var bestBefore = doc.data().bbDate; //gets the "bbDate" field
+                var bestBefore = doc.data().bbDate; //gets the "bbDate" field
                 //var foodCode = doc.data().code;    //get unique ID to each food to be used for fetching right image
-                //var docID = doc.id;
-                let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
-
+                var docID = doc.id;
                 //Calculate the days remaining
-                var bestBefore = doc.data().bbDate;
-
                 // Convert the date string to a Date object
                 var dateObject = new Date(bestBefore);
                 // Create current Date object
@@ -246,14 +163,17 @@ function displayCardsDynamically(collection) {
                 // Calculate the days past expiry
                 var negTimeDifference = currentDate - dateObject;
                 var negDaysDifference = Math.floor(negTimeDifference / millisecondsInADay) * (-1);
+                let newcard = cardTemplate.content.cloneNode(true).firstElementChild; // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
                 // Update food name and days left on card
                 newcard.querySelector('.card-title').innerHTML = title;
+                console.log(doc.id);
+                newcard.setAttribute('data-doc-id', doc.id);    
                 if (daysDifference >= 0) {
                     newcard.querySelector('.card-date').innerHTML = daysDifference + " days left";
                 } else if (daysDifference < 0) {
                     newcard.querySelector('.card-date').innerHTML = "Expired by " + ((-1) * negDaysDifference) + " days";
-                } else if (bestBefore = " ") {
+                } else if (bestBefore == "") {
                     newcard.querySelector('.card-date').innerHTML = "Click to add date";
                 }
 
@@ -270,8 +190,6 @@ function displayCardsDynamically(collection) {
             })
         })
 }
-
 window.setTimeout(function() {
     displayCardsDynamically("users");
-}, 500);
-  //input param is the name of the collection*/
+}, 500);  // Adjust the delay time as needed

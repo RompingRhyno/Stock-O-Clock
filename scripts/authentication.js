@@ -44,7 +44,7 @@ var uiConfig = {
                             });
 
                             //adds a food collection to the users document
-                            db.collection("users").doc(user.uid).collection("food").doc("food").set({
+                            db.collection("users").doc(user.uid).collection("food").doc().set({
 
                             }).then(function () {
                                    console.log("New user added to firestore");

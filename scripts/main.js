@@ -85,7 +85,6 @@ stockForm.addEventListener('submit', function (e) {
     })
         .then(function (docRef) {
             console.log('Document written with ID: ', docRef.id);
-
             // Reload the page after the write is successful
             location.reload(); // This will trigger a page refresh
         })
@@ -136,83 +135,6 @@ function deleteFood(event) {
             console.error('Error deleting document:', error);
         });
 }
-
-/*NOT FUNCTIONING YET. TRYING TO SORT DATA WITH ARRAY.sort
-
-// Store database as an array for sorting
-function getFoods() {
-    var dataArray = [];
-    var foodsRef = db.collection("foods");
-    
-
-    // Loop through the documents in the collection
-    foodsRef.get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(foods) {
-    // Get the data from each document
-    var data = foods.data();
-
-    var bestBefore = foods.data().bbDate;
-    // Create current Date object
-    var currentDate = new Date();
-    // Create best before date object
-    var dateObject = new Date(bestBefore);
-    // Calculate the days left
-    var timeDifference = dateObject - currentDate;
-    var millisecondsInADay = 1000 * 60 * 60 * 24;
-    var daysDifference = Math.floor(timeDifference / millisecondsInADay);
-
-    // Extract the specific fields you want and store them in the array
-    var name = data.name;
-    var daysLeft = daysDifference;
-
-    dataArray.push({name, daysDifference});
-    });
-/*
-    function sort() {
-        db.collection("foods").orderBy("bbDate").get()
-        .then(allFood => {
-            allFood.forEach(doc => {
-                console.log(doc.data().bbDate);
-            })
-        })
-    }
-
-    });
- 
-    
-// Sort the cards based on the days (ascending order)
-
-  // Function to display the sorted cards
-  function displaySortedCards() {
-    var foodCardTemplate = document.getElementById('foodCardTemplate');
-    var cardContainer = document.getElementById("foods-go-here");
-    dataArray.forEach(function(food) {
-        db.collection("users").doc(userId).collection("food").orderBy("bbDate").get()
-        .then(allFood => {
-            allFood.forEach(doc => {
-                let newcard = foodCardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
-                newcard.querySelector('.card-title').innerHTML = doc.data().name;
-                var currentDate = new Date();
-                if (daysDifference >= 0) {
-                    newcard.querySelector('.card-date').innerHTML = doc.data().bbDate - currentDate + " days left";
-                } else if (daysDifference < 0) {
-                    newcard.querySelector('.card-date').innerHTML = "Expired by " + ((-1) * doc.data().bbDate - currentDate) + " days";
-                } else if (bestBefore = " ") {
-                    newcard.querySelector('.card-date').innerHTML = "Click to add date";
-                }   
-                document.getElementById("foods-go-here").appendChild(newcard);
-                var cardElement = createCardElement(card.title, card.date);
-                cardContainer.appendChild(cardElement);
-            })
-        })
-    });
-  }
-  
-  // Call the function to display the sorted cards
-  displaySortedCards();
-}
-getFoods();
-*/
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------

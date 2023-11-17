@@ -271,4 +271,4 @@ function displayCardsDynamically(collection) {
 }
 
 
-displayCardsDynamically("users");  //input param is the name of the collection*/
+displayCardsDynamically("food");  //input param is the name of the collection*/

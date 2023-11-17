@@ -219,10 +219,10 @@ getFoods();
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
-/*
+
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("foodCardTemplate"); // Retrieve the HTML element with the ID "foodCardTemplate" and store it in the cardTemplate variable. 
-    db.collection(collection).get()   //the collection called "foods"
+    db.collection(collection).doc(userId).collection("food").get()   //the collection called "foods"
         .then(allFoods => {
             //var i = 1;  //Optional: if you want to have a unique ID for each food
             allFoods.forEach(doc => { //iterate thru each doc
@@ -271,4 +271,4 @@ function displayCardsDynamically(collection) {
 }
 
 
-displayCardsDynamically("foods");  //input param is the name of the collection*/
+displayCardsDynamically("users");  //input param is the name of the collection*/

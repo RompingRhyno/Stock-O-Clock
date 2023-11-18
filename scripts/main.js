@@ -39,8 +39,23 @@ function getUser() {
         }
     })
 }
+//Card edits
+function editFood(event) {
+    if (event.target.closest('.excludeButton')) {
+        // Click originated from excludeButton, do nothing
+        return;
+      }
+    console.log("edit food trigger")
+    openForm('edit');
+}
 
-function openForm() {
+function openForm(mode) {
+    // Assuming there is a span with class "formTitle" in the popup form
+    var formTitleSpan = document.querySelector('.form-title');
+    if (formTitleSpan) {
+        // Update the text based on the mode
+        formTitleSpan.textContent = (mode === 'edit') ? 'Edit Food' : 'Add Food';
+    }
     document.getElementById("myForm").style.display = "block";
 }
 
@@ -79,8 +94,11 @@ document.getElementById('numberChoice').addEventListener('change', function () {
 });
 // Write form info to firebase
 var stockForm = document.getElementById('myForm');
-stockForm.addEventListener('submit', function (e) {
+stockForm.addEventListener('submit', function () {
     var foodsRef = db.collection("users").doc(userId).collection("food");
+    //First letter of food to upper case
+    var foodNameInput = document.getElementById("food").value;
+    var foodName  = foodNameInput.substring(0,1).toUpperCase() + foodNameInput.substring(1);
     //Calendar date value
     var calDate = document.getElementById("date").value;
     //Dropdown days left value
@@ -92,7 +110,7 @@ stockForm.addEventListener('submit', function (e) {
     // Add calendar date to the data object if it's not empty
     if (calDate !== '') {
         dateSubmit = calDate + 'T' + currentTime;
-        console.log("caldate: " + dateSubmit)
+        //console.log("caldate: " + dateSubmit)
     }
     // Add bbDateString to the data object if it's not empty
     if (dayOffset !== '') {
@@ -107,14 +125,14 @@ stockForm.addEventListener('submit', function (e) {
         //Format to one string.
         var bbDateString = (year) + "-" + (mes) + "-" + (dia) + 'T' + currentTime;
         dateSubmit = bbDateString;
-        console.log("bbDateString :" + bbDateString);
+        //console.log("bbDateString :" + bbDateString);
     }
     console.log("dateSubmit: " + dateSubmit);
     foodsRef.add({
-        name: document.getElementById("food").value,
+        name: foodName,
         bbDate: dateSubmit
     })
-        .then(function (docRef) {
+        .then(function () {
             //console.log('Document written with ID: ', docRef.id);
             // Reload the page after the write is successful
             location.reload(); // This will trigger a page refresh
@@ -179,14 +197,14 @@ function displayCardsDynamically() {
             allFoods.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
                 var bestBefore = doc.data().bbDate;  //gets the "bbDate" field
-                console.log("firebase bb: " + bestBefore);
+                //console.log("firebase bb: " + bestBefore);
                 //var foodCode = doc.data().code;    //get unique ID to each food to be used for fetching right image
                 //var docID = doc.id;
                 // Convert the date string to a Date object
                 var dateObject = new Date(bestBefore);
                 // Create current Date object
                 var currentDate = new Date();
-                console.log("currentdateobj: " + currentDate);
+                //console.log("currentdateobj: " + currentDate);
                 // Calculate the days left
                 var timeDifference = dateObject - currentDate;
                 var millisecondsInADay = 1000 * 60 * 60 * 24;

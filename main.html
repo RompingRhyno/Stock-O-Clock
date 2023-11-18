@@ -48,7 +48,7 @@
     <div class="form-popup" id="myForm">
         <form class="form-container">
             <div class="close-container">
-                <span class="form-title">Add Food</span>
+                <p class="form-title">Add Food</p>
                 <button type="button" class="btn cancel" onclick="closeForm()">
                     <i class="fa-solid fa-circle-xmark"></i>
                 </button>
@@ -81,14 +81,12 @@
             </div>
         </div>
     </div>
-    <div class="add-items-container">
-        <button type="open-button" class="btn add" onclick="openForm()">
-            <i id="icon-bg" class="fa-solid fa-circle-plus fa-2xl"></i>
-        </button>
-    </div>
+    
     <footer class="fixed-bottom">
-        <div id="fridges">
-            
+        <div class="add-items-container">
+            <button type="open-button" class="btn add" onclick="openForm()">
+                <i id="icon-bg" class="fa-solid fa-circle-plus fa-2xl"></i>
+            </button>
         </div>
         <div class="shop-container">
             <a class="link" href="/shoplist.html">
@@ -123,14 +121,14 @@
     </footer>
     <!-- Templates for general use, not displayed -->
     <template id="foodCardTemplate">
-        <div class="card py-2 mx-3 mt-3" style="width: 90vw">
+        <div class="card py-2 mx-3 mt-3" style="width: 90vw" onclick="editFood(event)">
             <div class="card-body">
                 <div class="food-date">
                     <h5 class="card-title">Card title</h5>
                     <h5 class="card-date">placeholder</h5>
                 </div>
                 <div class="-container delete-container">
-                    <button type="button" class="btn delete" onclick="deleteFood(event)">
+                    <button type="button" class="btn delete excludeButton" onclick="deleteFood(event)">
                         <i class="fa-solid fa-trash-can trash"></i>
                     </button>
                 </div>

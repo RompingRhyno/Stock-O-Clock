@@ -1,10 +1,11 @@
-import updateDoc from "firebase/firestore"; 
+//import updateDoc from "firebase/firestore"; 
+//const updateDoc = firebase.updateDoc();
 
 function displayFridges() {
     db.collection("users").doc(userId).get()
         .then(doc => {
             for (let i = 0; i < doc.data().fridges.length; i++) {
-                db.collection("fridges").doc(doc.data().fridges[i]).get()
+                db.collection("fridges").doc(doc.data().fridges[i].id).get()
                     .then(name => {
                         console.log(name.data().fridgeName);
                     })
@@ -18,17 +19,19 @@ function addFridge(name) {
     const newFridge = db.collection("fridges").add({
         fridgeName: name
     }).then(doc => {
-        //firebase.firestore().runTransaction(transaction => {
-        db.collection("users").doc(userId).get()
-            .then(snapshot => {
-                console.log(snapshot.data().fridges);
-                //const largerArray = snapshot.get('fridges');
-                //snapshot.data().fridges.push(id);
-                updateDoc(snapshot, {
-                    fridges: arrayUnion(id)
-                });
-                //transaction.update(snapshot, 'fridges', snapshot.data().fridges.push(id));
-            });
-        //});
+        console.log(doc.id);
+        id = doc.id;
+        db.collection("users").doc(userId).update({
+            fridges: firebase.firestore.FieldValue.arrayUnion({id: id})
+        })
+    })
+}
+
+function joinFridge(id) {
+    db.collection("fridges").doc(id).get()
+    .then(doc => {
+        db.collection("fridges").doc(id).update({
+            users: firebase.firestore.FieldValue.arrayUnion({id: userId})
+        })
     })
 }

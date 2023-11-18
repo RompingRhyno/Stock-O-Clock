@@ -85,11 +85,13 @@ stockForm.addEventListener('submit', function (e) {
     var calDate = document.getElementById("date").value;
     //Dropdown days left value
     var dayOffset = document.getElementById("numberChoice").value;
+    // Get the current time
+    var currentTime = new Date().toLocaleTimeString('en-US', { hour12: false });
     // Create an object to hold the data to be submitted
     var dateSubmit;
     // Add calendar date to the data object if it's not empty
     if (calDate !== '') {
-        dateSubmit = calDate;
+        dateSubmit = calDate + 'T' + currentTime;
         console.log("caldate: " + dateSubmit)
     }
     // Add bbDateString to the data object if it's not empty
@@ -98,18 +100,16 @@ stockForm.addEventListener('submit', function (e) {
         var millisecondOffset = dayOffset * 24 * 60 * 60 * 1000;
         var milliDate = currentDate.setTime(currentDate.getTime() + millisecondOffset); 
         var bbDateObj = new Date(milliDate);
-        //console.log(bbDateObj);
         //Get all parts of date from date object
         var year = bbDateObj.getFullYear();
         var mes = bbDateObj.getMonth() + 1;
         var dia = bbDateObj.getDate();
         //Format to one string.
-        var bbDateString = (year) + "-" + (mes) + "-" + (dia);
+        var bbDateString = (year) + "-" + (mes) + "-" + (dia) + 'T' + currentTime;
         dateSubmit = bbDateString;
-        
+        console.log("bbDateString :" + bbDateString);
     }
     console.log("dateSubmit: " + dateSubmit);
-    //console.log("bbdatestring: " + bbDateString);
     foodsRef.add({
         name: document.getElementById("food").value,
         bbDate: dateSubmit
@@ -117,7 +117,7 @@ stockForm.addEventListener('submit', function (e) {
         .then(function (docRef) {
             //console.log('Document written with ID: ', docRef.id);
             // Reload the page after the write is successful
-            //location.reload(); // This will trigger a page refresh
+            location.reload(); // This will trigger a page refresh
         })
         .catch(function (error) {
             console.error('Error adding document: ', error);
@@ -181,23 +181,16 @@ function displayCardsDynamically() {
                 var bestBefore = doc.data().bbDate;  //gets the "bbDate" field
                 console.log("firebase bb: " + bestBefore);
                 //var foodCode = doc.data().code;    //get unique ID to each food to be used for fetching right image
-                var docID = doc.id;
-                //Calculate the days remaining
+                //var docID = doc.id;
                 // Convert the date string to a Date object
-                var notUTC = new Date(bestBefore);
-                console.log("notUTC retrieved: " + notUTC);
-                
-                var dateObject = new Date(notUTC.toUTCString());
-                console.log("utc time: " + dateObject);
+                var dateObject = new Date(bestBefore);
                 // Create current Date object
                 var currentDate = new Date();
                 console.log("currentdateobj: " + currentDate);
                 // Calculate the days left
                 var timeDifference = dateObject - currentDate;
-                console.log("ms difference: " + timeDifference);
                 var millisecondsInADay = 1000 * 60 * 60 * 24;
                 var daysDifference = Math.floor(timeDifference / millisecondsInADay);
-                console.log("daysdiff: " + daysDifference);
                 // Calculate the days past expiry
                 var negTimeDifference = currentDate - dateObject;
                 var negDaysDifference = Math.floor(negTimeDifference / millisecondsInADay) * (-1);
@@ -205,7 +198,7 @@ function displayCardsDynamically() {
 
                 // Update food name and days left on card
                 newcard.querySelector('.card-title').innerHTML = title;
-                newcard.setAttribute('data-doc-id', doc.id);    
+                newcard.setAttribute('data-doc-id', doc.id);
                 if (daysDifference >= 0) {
                     newcard.querySelector('.card-date').innerHTML = daysDifference + " days left";
                 } else if (daysDifference < 0) {
@@ -213,7 +206,6 @@ function displayCardsDynamically() {
                 } else if (bestBefore == "") {
                     newcard.querySelector('.card-date').innerHTML = "Click to add date";
                 }
-
                 //Optional: give unique ids to all elements for future use
                 // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
                 // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);

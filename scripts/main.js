@@ -10,7 +10,7 @@ function getNameFromAuth() {
             userId = user.uid;
             console.log(user.displayName);  //print the user name in the browser console
             userName = user.displayName;
-            console.log(user);
+            //console.log(user);
             userFridges = user.fridges;
             // Split the string into words using a space as the delimiter
             var name = user.displayName.split(" ");
@@ -80,25 +80,54 @@ document.getElementById('numberChoice').addEventListener('change', function () {
 // Write form info to firebase
 var stockForm = document.getElementById('myForm');
 stockForm.addEventListener('submit', function (e) {
-    console.log("food added");
     var foodsRef = db.collection("users").doc(userId).collection("food");
+    //Calendar date value
+    var calDate = document.getElementById("date").value;
+    //Dropdown days left value
+    var dayOffset = document.getElementById("numberChoice").value;
+    // Create an object to hold the data to be submitted
+    var dateSubmit;
+    // Add calendar date to the data object if it's not empty
+    if (calDate !== '') {
+        dateSubmit = calDate;
+        console.log("caldate: " + dateSubmit)
+    }
+    // Add bbDateString to the data object if it's not empty
+    if (dayOffset !== '') {
+        var currentDate = new Date();
+        var millisecondOffset = dayOffset * 24 * 60 * 60 * 1000;
+        var milliDate = currentDate.setTime(currentDate.getTime() + millisecondOffset); 
+        var bbDateObj = new Date(milliDate);
+        //console.log(bbDateObj);
+        //Get all parts of date from date object
+        var year = bbDateObj.getFullYear();
+        var mes = bbDateObj.getMonth() + 1;
+        var dia = bbDateObj.getDate();
+        //Format to one string.
+        var bbDateString = (year) + "-" + (mes) + "-" + (dia);
+        dateSubmit = bbDateString;
+        
+    }
+    console.log("dateSubmit: " + dateSubmit);
+    //console.log("bbdatestring: " + bbDateString);
     foodsRef.add({
         name: document.getElementById("food").value,
-        bbDate: document.getElementById("date").value
+        bbDate: dateSubmit
     })
         .then(function (docRef) {
-            console.log('Document written with ID: ', docRef.id);
+            //console.log('Document written with ID: ', docRef.id);
             // Reload the page after the write is successful
-            location.reload(); // This will trigger a page refresh
+            //location.reload(); // This will trigger a page refresh
         })
         .catch(function (error) {
             console.error('Error adding document: ', error);
         });
     // Clear the form fields
     document.getElementById('food').value = '',
-        document.getElementById('date').value = '';
+    document.getElementById('date').value = '';
     document.getElementById('numberChoice').selectedIndex = 0;
     closeForm();
+    
 });
 
 //Delete Food Card
@@ -144,24 +173,31 @@ function deleteFood(event) {
 
 function displayCardsDynamically() {
     let cardTemplate = document.getElementById("foodCardTemplate"); // Retrieve the HTML element with the ID "foodCardTemplate" and store it in the cardTemplate variable. 
-    console.log("Before Firestore Query");
     db.collection("users").doc(userId).collection("food").orderBy("bbDate").get()   //the collection called "foods"
         .then(allFoods => {
             //var i = 1;  //Optional: if you want to have a unique ID for each food
             allFoods.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
-                var bestBefore = doc.data().bbDate; //gets the "bbDate" field
+                var bestBefore = doc.data().bbDate;  //gets the "bbDate" field
+                console.log("firebase bb: " + bestBefore);
                 //var foodCode = doc.data().code;    //get unique ID to each food to be used for fetching right image
                 var docID = doc.id;
                 //Calculate the days remaining
                 // Convert the date string to a Date object
-                var dateObject = new Date(bestBefore);
+                var notUTC = new Date(bestBefore);
+                console.log("notUTC retrieved: " + notUTC);
+                
+                var dateObject = new Date(notUTC.toUTCString());
+                console.log("utc time: " + dateObject);
                 // Create current Date object
                 var currentDate = new Date();
+                console.log("currentdateobj: " + currentDate);
                 // Calculate the days left
                 var timeDifference = dateObject - currentDate;
+                console.log("ms difference: " + timeDifference);
                 var millisecondsInADay = 1000 * 60 * 60 * 24;
                 var daysDifference = Math.floor(timeDifference / millisecondsInADay);
+                console.log("daysdiff: " + daysDifference);
                 // Calculate the days past expiry
                 var negTimeDifference = currentDate - dateObject;
                 var negDaysDifference = Math.floor(negTimeDifference / millisecondsInADay) * (-1);
@@ -169,7 +205,6 @@ function displayCardsDynamically() {
 
                 // Update food name and days left on card
                 newcard.querySelector('.card-title').innerHTML = title;
-                console.log(doc.id);
                 newcard.setAttribute('data-doc-id', doc.id);    
                 if (daysDifference >= 0) {
                     newcard.querySelector('.card-date').innerHTML = daysDifference + " days left";
@@ -194,4 +229,4 @@ function displayCardsDynamically() {
 }
 window.setTimeout(function() {
     displayCardsDynamically();
-}, 250);  // Adjust the delay time as needed
+}, 500);  // Adjust the delay time as needed

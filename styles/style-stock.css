@@ -170,20 +170,23 @@ button i:before {
 .row {
   justify-content: center;
 }
+/*
 .container.food-card {
   padding-bottom: 200px;
 }
+*/
 #numberChoice {
   padding: 11.9px;
   overflow-y: auto;
 }
-h1{
+h1 {
   color: rgb(150, 99, 49);
   text-align: center;
 }
 #daysDropdown {
   max-height: 100px; /* Set a maximum height for the dropdown */
   overflow-y: auto; /* Enable vertical scrolling when needed */
+  margin-bottom: 200px;
 }
 #daysDropdown option[value=""] {
   display: none;

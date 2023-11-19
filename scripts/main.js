@@ -50,12 +50,12 @@ function editFood(event) {
     console.log(docId);
     var foodField = document.getElementById('food');
     var dateField = document.getElementById('date');
+    var dayField = document.getElementById('numberChoice');
     db.collection("users").doc(userId).collection("food").doc(docId).get()
     .then(doc => {
         if (doc.exists) {
             var foodValue = doc.data().name;
             var dateValue = doc.data().bbDate;
-            
             var dateObject = new Date(dateValue);
 
             // Extract the date components
@@ -66,10 +66,12 @@ function editFood(event) {
             // Form the "yyyy-mm-dd" string
             var formattedDateString = `${year}-${month}-${day}`;
 
+            // Fill the form fields with the current values
             console.log(foodValue);
             console.log(dateValue);
             foodField.value = foodValue;
             dateField.value = formattedDateString;
+            
             stockForm.addEventListener('submit', function () {
                 deleteDocument(docId);
             });   
@@ -84,9 +86,16 @@ function openForm(mode) {
     if (formTitleSpan) {
         // Update the text based on the mode
         formTitleSpan.textContent = (mode === 'edit') ? 'Edit Food' : 'Add Food';
-        
     }
     document.getElementById("myForm").style.display = "block";
+    var dateField = document.getElementById('date');
+    var dayField = document.getElementById('numberChoice');
+    document.getElementById('date').addEventListener('click', function() {
+        document.getElementById('numberChoice').selectedIndex = 0;
+    });
+    document.getElementById('numberChoice').addEventListener('click', function() {
+        document.getElementById('date').value = '';
+    });
 }
 
 function sleep(ms) {
@@ -146,7 +155,7 @@ stockForm.addEventListener('submit', function () {
     if (dayOffset !== '') {
         var currentDate = new Date();
         var millisecondOffset = dayOffset * 24 * 60 * 60 * 1000;
-        var milliDate = currentDate.setTime(currentDate.getTime() + millisecondOffset); 
+        var milliDate = currentDate.setTime(currentDate.getTime() + millisecondOffset);
         var bbDateObj = new Date(milliDate);
         //Get all parts of date from date object
         var year = bbDateObj.getFullYear();
@@ -175,7 +184,6 @@ stockForm.addEventListener('submit', function () {
     document.getElementById('date').value = '';
     document.getElementById('numberChoice').selectedIndex = 0;
     closeForm();
-    
 });
 
 //Delete Food Card

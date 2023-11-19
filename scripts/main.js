@@ -50,7 +50,6 @@ function editFood(event) {
     console.log(docId);
     var foodField = document.getElementById('food');
     var dateField = document.getElementById('date');
-    var dayField = document.getElementById('numberChoice');
     db.collection("users").doc(userId).collection("food").doc(docId).get()
     .then(doc => {
         if (doc.exists) {

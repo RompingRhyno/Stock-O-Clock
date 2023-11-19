@@ -170,11 +170,9 @@ button i:before {
 .row {
   justify-content: center;
 }
-/*
 .container.food-card {
   padding-bottom: 200px;
 }
-*/
 #numberChoice {
   padding: 11.9px;
   overflow-y: auto;

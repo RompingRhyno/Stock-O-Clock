@@ -45,7 +45,36 @@ function editFood(event) {
         // Click originated from excludeButton, do nothing
         return;
       }
-    console.log("edit food trigger")
+    var card = event.target.closest('.card');
+    var docId = card.getAttribute('data-doc-id');
+    console.log(docId);
+    var foodField = document.getElementById('food');
+    var dateField = document.getElementById('date');
+    db.collection("users").doc(userId).collection("food").doc(docId).get()
+    .then(doc => {
+        if (doc.exists) {
+            var foodValue = doc.data().name;
+            var dateValue = doc.data().bbDate;
+            
+            var dateObject = new Date(dateValue);
+
+            // Extract the date components
+            var year = dateObject.getFullYear();
+            var month = String(dateObject.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            var day = String(dateObject.getDate()).padStart(2, '0');
+
+            // Form the "yyyy-mm-dd" string
+            var formattedDateString = `${year}-${month}-${day}`;
+
+            console.log(foodValue);
+            console.log(dateValue);
+            foodField.value = foodValue;
+            dateField.value = formattedDateString;
+            stockForm.addEventListener('submit', function () {
+                deleteDocument(docId);
+            });   
+        }
+    });
     openForm('edit');
 }
 
@@ -55,6 +84,7 @@ function openForm(mode) {
     if (formTitleSpan) {
         // Update the text based on the mode
         formTitleSpan.textContent = (mode === 'edit') ? 'Edit Food' : 'Add Food';
+        
     }
     document.getElementById("myForm").style.display = "block";
 }
@@ -159,7 +189,6 @@ db.collection("foods").get().then(function (querySnapshot) {
 
     })
 })
-
 
 // Function to delete a document from Firestore
 function deleteDocument(docId) {

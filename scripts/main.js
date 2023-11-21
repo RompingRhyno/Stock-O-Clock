@@ -31,7 +31,60 @@ function getNameFromAuth() {
 }
 getNameFromAuth(); //run the function
 
-function openForm() {
+function getUser() {
+    firebase.auth(user => {
+        if(user) {
+            return user.uid;
+        }
+    })
+}
+//Card edits
+function editFood(event) {
+    if (event.target.closest('.excludeButton')) {
+        // Click originated from excludeButton, do nothing
+        return;
+      }
+    var card = event.target.closest('.card');
+    var docId = card.getAttribute('data-doc-id');
+    console.log(docId);
+    var foodField = document.getElementById('food');
+    var dateField = document.getElementById('date');
+    db.collection("fridges").doc(getFridgeId()).collection("food").doc(docId).get()
+    .then(doc => {
+        if (doc.exists) {
+            var foodValue = doc.data().name;
+            var dateValue = doc.data().bbDate;
+            var dateObject = new Date(dateValue);
+
+            // Extract the date components
+            var year = dateObject.getFullYear();
+            var month = String(dateObject.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            var day = String(dateObject.getDate()).padStart(2, '0');
+
+            // Form the "yyyy-mm-dd" string
+            var formattedDateString = `${year}-${month}-${day}`;
+
+            // Fill the form fields with the current values
+            console.log(foodValue);
+            console.log(dateValue);
+            foodField.value = foodValue;
+            dateField.value = formattedDateString;
+            
+            stockForm.addEventListener('submit', function () {
+                deleteDocument(docId);
+            });   
+        }
+    });
+    openForm('edit');
+}
+
+function openForm(mode) {
+    // Assuming there is a span with class "formTitle" in the popup form
+    var formTitleSpan = document.querySelector('.form-title');
+    if (formTitleSpan) {
+        // Update the text based on the mode
+        formTitleSpan.textContent = (mode === 'edit') ? 'Edit Food' : 'Add Food';
+    }
     document.getElementById("myForm").style.display = "block";
     var dateField = document.getElementById('date');
     var dayField = document.getElementById('numberChoice');
@@ -78,9 +131,40 @@ document.getElementById('numberChoice').addEventListener('change', function () {
 });
 // Write food info from form to firebase
 var stockForm = document.getElementById('myForm');
-stockForm.addEventListener('submit', function (e) {
-    console.log("food added");
-    var foodsRef = db.collection("foods");
+stockForm.addEventListener('submit', function () {
+    var foodsRef = db.collection("fridges").doc(getFridgeId()).collection("food");
+    //First letter of food to upper case
+    var foodNameInput = document.getElementById("food").value;
+    var foodName  = foodNameInput.substring(0,1).toUpperCase() + foodNameInput.substring(1);
+    //Calendar date value
+    var calDate = document.getElementById("date").value;
+    //Dropdown days left value
+    var dayOffset = document.getElementById("numberChoice").value;
+    // Get the current time
+    var currentTime = new Date().toLocaleTimeString('en-US', { hour12: false });
+    // Create an object to hold the data to be submitted
+    var dateSubmit;
+    // Add calendar date to the data object if it's not empty
+    if (calDate !== '') {
+        dateSubmit = calDate + 'T' + currentTime;
+        //console.log("caldate: " + dateSubmit)
+    }
+    // Add bbDateString to the data object if it's not empty
+    if (dayOffset !== '') {
+        var currentDate = new Date();
+        var millisecondOffset = dayOffset * 24 * 60 * 60 * 1000;
+        var milliDate = currentDate.setTime(currentDate.getTime() + millisecondOffset);
+        var bbDateObj = new Date(milliDate);
+        //Get all parts of date from date object
+        var year = bbDateObj.getFullYear();
+        var mes = bbDateObj.getMonth() + 1;
+        var dia = bbDateObj.getDate();
+        //Format to one string.
+        var bbDateString = (year) + "-" + (mes) + "-" + (dia) + 'T' + currentTime;
+        dateSubmit = bbDateString;
+        //console.log("bbDateString :" + bbDateString);
+    }
+    console.log("dateSubmit: " + dateSubmit);
     foodsRef.add({
         name: foodName,
         bbDate: dateSubmit
@@ -114,7 +198,7 @@ db.collection("foods").get().then(function (querySnapshot) {
 
 // Function to delete a document from Firestore
 function deleteDocument(docId) {
-    return db.collection("users").doc(userId).collection("food").doc(docId).delete();
+    return db.collection("fridges").doc(getFridgeId()).collection("food").doc(docId).delete();
 }
 
 // Function to handle the delete button click event

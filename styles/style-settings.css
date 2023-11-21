@@ -87,6 +87,17 @@ footer {
   color: rgb(150, 99, 49);
 }
 
+.fridge-dropdown {
+  grid-area: button;
+  height: 5%;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.fridge-dropdown i {
+  color: rgb(150, 99, 49);
+}
+
 .option {
   display: flex;
   align-items: center;

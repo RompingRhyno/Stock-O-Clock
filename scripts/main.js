@@ -7,7 +7,6 @@ function getNameFromAuth() {
         if (user) {
             // Do something for the currently logged-in user here: 
             console.log(user.uid); //print the uid in the browser console
-            userId = user.uid;
             console.log(user.displayName);  //print the user name in the browser console
             userName = user.displayName;
             //console.log(user);
@@ -50,7 +49,7 @@ function editFood(event) {
     console.log(docId);
     var foodField = document.getElementById('food');
     var dateField = document.getElementById('date');
-    db.collection("users").doc(userId).collection("food").doc(docId).get()
+    db.collection("fridges").doc(getFridgeId()).collection("food").doc(docId).get()
     .then(doc => {
         if (doc.exists) {
             var foodValue = doc.data().name;
@@ -130,10 +129,10 @@ document.getElementById('numberChoice').addEventListener('change', function () {
         this.selectedIndex = -1;
     }
 });
-// Write form info to firebase
+// Write food info from form to firebase
 var stockForm = document.getElementById('myForm');
 stockForm.addEventListener('submit', function () {
-    var foodsRef = db.collection("users").doc(userId).collection("food");
+    var foodsRef = db.collection("fridges").doc(getFridgeId()).collection("food");
     //First letter of food to upper case
     var foodNameInput = document.getElementById("food").value;
     var foodName  = foodNameInput.substring(0,1).toUpperCase() + foodNameInput.substring(1);
@@ -192,13 +191,13 @@ db.collection("foods").get().then(function (querySnapshot) {
     querySnapshot.forEach(function (doc) {
         var d = String(doc.id);
         foodDocument.push(d);
-        //console.log(foodDocument);
+        console.log(foodDocument);
 
     })
 })
 // Function to delete a document from Firestore
 function deleteDocument(docId) {
-    return db.collection("users").doc(userId).collection("food").doc(docId).delete();
+    return db.collection("fridges").doc(getFridgeId()).collection("food").doc(docId).delete();
 }
 
 // Function to handle the delete button click event
@@ -220,13 +219,83 @@ function deleteFood(event) {
             console.error('Error deleting document:', error);
         });
 }
+//NOT FUNCTIONING YET. TRYING TO SORT DATA WITH ARRAY.sort
+
+// Store database as an array for sorting
+function getFoods() {
+    var dataArray = [];
+    var foodsRef = db.collection("foods");
+    
+
+    // Loop through the documents in the collection
+    foodsRef.get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(foods) {
+    // Get the data from each document
+    var data = foods.data();
+
+    var bestBefore = foods.data().bbDate;
+    // Create current Date object
+    var currentDate = new Date();
+    // Create best before date object
+    var dateObject = new Date(bestBefore);
+    // Calculate the days left
+    var timeDifference = dateObject - currentDate;
+    var millisecondsInADay = 1000 * 60 * 60 * 24;
+    var daysDifference = Math.floor(timeDifference / millisecondsInADay);
+
+    // Extract the specific fields you want and store them in the array
+    var name = data.name;
+    var daysLeft = daysDifference;
+
+    dataArray.push({name, daysDifference});
+    });
+
+    function sort() {
+        db.collection("foods").orderBy("bbDate").get()
+        .then(allFood => {
+            allFood.forEach(doc => {
+                console.log(doc.data().bbDate);
+            })
+        })
+    }
+
+    });
+  
+    
+// Sort the cards based on the days (ascending order)
+
+  // Function to display the sorted cards
+  function displaySortedCards() {
+    var foodCardTemplate = document.getElementById('foodCardTemplate');
+    var cardContainer = document.getElementById("foods-go-here");
+    dataArray.forEach(function(food) {
+        let newcard = foodCardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
+        newcard.querySelector('.card-title').innerHTML = title;
+                if (daysDifference >= 0) {
+                    newcard.querySelector('.card-date').innerHTML = daysDifference + " days left";
+                } else if (daysDifference < 0) {
+                    newcard.querySelector('.card-date').innerHTML = "Expired by " + ((-1) * daysDifference) + " days";
+                } else if (bestBefore = " ") {
+                    newcard.querySelector('.card-date').innerHTML = "Click to add date";
+                }
+        document.getElementById("foods-go-here").appendChild(newcard);
+      var cardElement = createCardElement(card.title, card.date);
+      cardContainer.appendChild(cardElement);
+    });
+  }
+  
+  // Call the function to display the sorted cards
+  displaySortedCards();
+}
+getFoods();
+
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
 
-function displayCardsDynamically() {
+function displayCardsDynamically(id) {
     let cardTemplate = document.getElementById("foodCardTemplate"); // Retrieve the HTML element with the ID "foodCardTemplate" and store it in the cardTemplate variable. 
-    db.collection("users").doc(userId).collection("food").orderBy("bbDate").get()   //the collection called "foods"
+    db.collection("fridges").doc(id).collection("food").orderBy("bbDate").get()   //the collection called "foods"
         .then(allFoods => {
             //var i = 1;  //Optional: if you want to have a unique ID for each food
             allFoods.forEach(doc => { //iterate thru each doc
@@ -271,6 +340,8 @@ function displayCardsDynamically() {
             })
         })
 }
+
+//var currentLocation = 
 window.setTimeout(function() {
-    displayCardsDynamically();
+    displayCardsDynamically(getFridgeId());
 }, 500);  // Adjust the delay time as needed

@@ -18,6 +18,7 @@ function setFridgeId(fridgeId) {
 
 
 
+//Toggle button for activating notifications
 const toggleButtonContainer = document.querySelectorAll('.toggle-button');
 const toggleButton = document.querySelectorAll('.toggle-button i');
 
@@ -27,6 +28,16 @@ for (let i = 0; i < toggleButton.length; i++) {
         toggleButton[i].classList.toggle('fa-toggle-on');
     });
 };
+
+//Toggle dropdown menu for fridge list
+const fridgeListContainer = document.querySelector('.fridge-dropdown');
+const fridgeList = document.querySelector('.fridge-dropdown i');
+
+fridgeListContainer.addEventListener('click', function () {
+        fridgeList.classList.toggle('fa-caret-down');
+        fridgeList.classList.toggle('fa-caret-up');
+});
+
 
 var currentUser;               //points to the document of the user who is logged in
 function notificationToggle() {

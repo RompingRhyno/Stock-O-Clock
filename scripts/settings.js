@@ -12,6 +12,10 @@ function getFridgeId() {
     return currentFridge;
 }
 
+function setFridgeId(fridgeId) {
+    currentFridge = fridgeId;
+}
+
 
 
 //Toggle button for activating notifications

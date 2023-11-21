@@ -19,7 +19,6 @@ function addFridge(name) {
     const newFridge = db.collection("fridges").add({
         fridgeName: name
     }).then(doc => {
-        console.log(doc.id);
         id = doc.id;
         db.collection("users").doc(userId).update({
             fridges: firebase.firestore.FieldValue.arrayUnion({id: id})
@@ -34,4 +33,12 @@ function joinFridge(id) {
             users: firebase.firestore.FieldValue.arrayUnion({id: userId})
         })
     })
+}
+
+function getItemsInFridge(currentFridge) {
+    db.collection("fridges").doc(currentFridge).collection("food").get().then(allFood => {
+        allFood.forEach(doc => {
+            console.log(doc.data().name);
+        });
+    });
 }

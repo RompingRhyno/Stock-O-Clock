@@ -2,8 +2,17 @@
 //var collection = require("firebase/firestore");
 
 var user = firebase.auth();
+
+//var currentLocation = "fridges";
+var currentFridge = "nqg7sC5Q4Z5SIBiBajfj";
 // var settings = db.collection("users").doc(user.uid)
 // .collection("settings").doc("settings");
+
+function getFridgeId() {
+    return currentFridge;
+}
+
+
 
 const toggleButtonContainer = document.querySelectorAll('.toggle-button');
 const toggleButton = document.querySelectorAll('.toggle-button i');

@@ -12,6 +12,10 @@ function getFridgeId() {
     return currentFridge;
 }
 
+function setFridgeId(fridgeId) {
+    currentFridge = fridgeId;
+}
+
 
 
 const toggleButtonContainer = document.querySelectorAll('.toggle-button');

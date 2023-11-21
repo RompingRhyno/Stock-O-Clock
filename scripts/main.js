@@ -225,9 +225,9 @@ function deleteFood(event) {
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
 
-function displayCardsDynamically(id) {
+function displayCardsDynamically() {
     let cardTemplate = document.getElementById("foodCardTemplate"); // Retrieve the HTML element with the ID "foodCardTemplate" and store it in the cardTemplate variable. 
-    db.collection("fridges").doc(id).collection("food").orderBy("bbDate").get()   //the collection called "foods"
+    db.collection("fridges").doc(getFridgeId()).collection("food").orderBy("bbDate").get()   //the collection called "foods"
         .then(allFoods => {
             //var i = 1;  //Optional: if you want to have a unique ID for each food
             allFoods.forEach(doc => { //iterate thru each doc
@@ -276,5 +276,5 @@ function displayCardsDynamically(id) {
 
 //var currentLocation = 
 window.setTimeout(function() {
-    displayCardsDynamically(getFridgeId());
+    displayCardsDynamically();
 }, 500);  // Adjust the delay time as needed

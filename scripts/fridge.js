@@ -7,7 +7,7 @@ function displayFridges() {
             for (let i = 0; i < doc.data().fridges.length; i++) {
                 db.collection("fridges").doc(doc.data().fridges[i].id).get()
                     .then(name => {
-                        console.log(name.data().fridgeName);
+                        console.log(name.id);
                     })
             }
         });
@@ -17,7 +17,8 @@ function addFridge(name) {
     //import updateDoc from "firebase/firestore";
     var id;
     const newFridge = db.collection("fridges").add({
-        fridgeName: name
+        fridgeName: name,
+        users: []
     }).then(doc => {
         id = doc.id;
         db.collection("users").doc(userId).update({
@@ -32,13 +33,16 @@ function joinFridge(id) {
         db.collection("fridges").doc(id).update({
             users: firebase.firestore.FieldValue.arrayUnion({id: userId})
         })
+        db.collection("users").doc(userId).update({
+            fridges: firebase.firestore.FieldValue.arrayUnion({id: id})
+        })
     })
 }
 
-function getItemsInFridge(currentFridge) {
-    db.collection("fridges").doc(currentFridge).collection("food").get().then(allFood => {
+function getItemsInFridge() {
+    db.collection("fridges").doc(getFridgeId()).collection("food").get().then(allFood => {
         allFood.forEach(doc => {
-            console.log(doc.data().name);
+            console.log(doc.id);
         });
     });
 }

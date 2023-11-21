@@ -50,7 +50,7 @@ function editFood(event) {
     console.log(docId);
     var foodField = document.getElementById('food');
     var dateField = document.getElementById('date');
-    db.collection("users").doc(userId).collection("food").doc(docId).get()
+    db.collection("fridges").doc(getFridgeId()).collection("food").doc(docId).get()
     .then(doc => {
         if (doc.exists) {
             var foodValue = doc.data().name;
@@ -133,7 +133,7 @@ document.getElementById('numberChoice').addEventListener('change', function () {
 // Write form info to firebase
 var stockForm = document.getElementById('myForm');
 stockForm.addEventListener('submit', function () {
-    var foodsRef = db.collection("users").doc(userId).collection("food");
+    var foodsRef = db.collection("fridges").doc(getFridgeId()).collection("food");
     //First letter of food to upper case
     var foodNameInput = document.getElementById("food").value;
     var foodName  = foodNameInput.substring(0,1).toUpperCase() + foodNameInput.substring(1);
@@ -199,7 +199,7 @@ db.collection("foods").get().then(function (querySnapshot) {
 
 // Function to delete a document from Firestore
 function deleteDocument(docId) {
-    return db.collection("users").doc(userId).collection("food").doc(docId).delete();
+    return db.collection("fridges").doc(getFridgeId()).collection("food").doc(docId).delete();
 }
 
 // Function to handle the delete button click event

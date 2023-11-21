@@ -43,10 +43,19 @@ body {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
+.add-items-container {
+  grid-area: add;
+  text-align: center;
+
+}
 footer{
   display:grid;
-  grid-template-areas: "shop stock setting";
+  grid-template-areas: 
+  ". add ."
+  "shop stock setting";
   grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 15px;
 }
 .nav-icon {
   font-size: 15pt;
@@ -59,9 +68,6 @@ footer{
   color: inherit;
 }
 .add {
-  position: fixed;
-  bottom: 14%;
-  left: 67%;
   font-size: 30pt;
   /*color: rgb(136, 134, 236);*/
   color: rgb(137, 176, 53);
@@ -165,19 +171,20 @@ button i:before {
   justify-content: center;
 }
 .container.food-card {
-  padding-bottom: 250px;
+  padding-bottom: 200px;
 }
 #numberChoice {
   padding: 11.9px;
   overflow-y: auto;
 }
-h1{
+h1 {
   color: rgb(150, 99, 49);
   text-align: center;
 }
 #daysDropdown {
   max-height: 100px; /* Set a maximum height for the dropdown */
   overflow-y: auto; /* Enable vertical scrolling when needed */
+  margin-bottom: 200px;
 }
 #daysDropdown option[value=""] {
   display: none;

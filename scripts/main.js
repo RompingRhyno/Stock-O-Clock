@@ -196,7 +196,6 @@ db.collection("foods").get().then(function (querySnapshot) {
 
     })
 })
-
 // Function to delete a document from Firestore
 function deleteDocument(docId) {
     return db.collection("users").doc(userId).collection("food").doc(docId).delete();
@@ -268,7 +267,6 @@ function displayCardsDynamically() {
                 //attach to gallery, Example: "foods-go-here"
                 //console.log(newCard);
                 document.getElementById("foods-go-here").appendChild(newcard);
-
                 //i++;   //Optional: iterate variable to serve as unique ID
             })
         })

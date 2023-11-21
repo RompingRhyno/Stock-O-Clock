@@ -113,3 +113,6 @@ footer {
   text-decoration: underline;
   font-weight: 700;
 }
+option {
+  padding: 0;
+}

@@ -57,6 +57,10 @@ var uiConfig = {
 
                             });
 
+                            db.collection("users").doc(user.uid).collection("autoFill").doc().set({
+                                   test: "Something"
+                            });
+
                             var id;
 
                             db.collection("fridges").doc().set({
@@ -80,9 +84,7 @@ var uiConfig = {
                                    });
                             });
 
-                            db.collection("users").doc(user.uid).collection("autoFill").doc().set({
-
-                            });
+                            
                      } else {
                             return true;
                      }

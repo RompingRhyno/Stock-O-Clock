@@ -45,7 +45,7 @@ function editFood(event) {
         return;
       }
     var card = event.target.closest('.card');
-    var docId = card.getAttribute('data-doc-id');
+    var docId = card.getAttribute('data-doc-id');show
     console.log(docId);
     var foodField = document.getElementById('food');
     var dateField = document.getElementById('date');

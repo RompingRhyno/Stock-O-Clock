@@ -174,7 +174,8 @@ button i:before {
   padding-bottom: 200px;
 }
 #numberChoice {
-  padding: 11.9px;
+  
+  padding: 12px;
   overflow-y: auto;
 }
 h1 {
@@ -182,10 +183,15 @@ h1 {
   text-align: center;
 }
 #daysDropdown {
-  max-height: 100px; /* Set a maximum height for the dropdown */
+  max-height: 1px; /* Set a maximum height for the dropdown */
   overflow-y: auto; /* Enable vertical scrolling when needed */
   margin-bottom: 200px;
 }
 #daysDropdown option[value=""] {
   display: none;
+}
+option {
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
 }

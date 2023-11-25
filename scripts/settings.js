@@ -2,10 +2,23 @@
 //var collection = require("firebase/firestore");
 
 var user = firebase.auth();
+
+//var currentLocation = "fridges";
+var currentFridge = "nqg7sC5Q4Z5SIBiBajfj";
 // var settings = db.collection("users").doc(user.uid)
 // .collection("settings").doc("settings");
 
-// Settings toggles
+function getFridgeId() {
+    return currentFridge;
+}
+
+function setFridgeId(fridgeId) {
+    currentFridge = fridgeId;
+}
+
+
+
+//Toggle button for activating notifications
 const toggleButtonContainer = document.querySelectorAll('.toggle-button');
 const toggleButton = document.querySelectorAll('.toggle-button i');
 
@@ -50,6 +63,17 @@ function closeCForm() {
 
 // Toggle Notifications
 
+//Toggle dropdown menu for fridge list
+const fridgeListContainer = document.querySelector('.fridge-dropdown');
+const fridgeList = document.querySelector('.fridge-dropdown i');
+
+fridgeListContainer.addEventListener('click', function () {
+    fridgeList.classList.toggle('fa-caret-down');
+    fridgeList.classList.toggle('fa-caret-up');
+});
+
+
+var currentUser;               //points to the document of the user who is logged in
 function notificationToggle() {
     db.collection("users")
         .then((snapshot) => {

@@ -87,6 +87,32 @@ footer {
   color: rgb(150, 99, 49);
 }
 
+.toggle-button-f {
+  grid-area: button;
+  height: 5%;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.toggle-button-f i {
+  color: rgb(150, 99, 49);
+}
+
+.add-items-container {
+  grid-area: button;
+  height: 5%;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.add {
+  padding-right: 0;
+}
+
+.add i {
+  color: rgb(150, 99, 49);
+}
+
 .option {
   display: flex;
   align-items: center;
@@ -112,4 +138,69 @@ footer {
   background-color: rgb(193, 174, 124);
   text-decoration: underline;
   font-weight: 700;
+}
+
+/* AAA */
+.form-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid rgb(150, 99, 49);
+  border-radius: 10px;
+  z-index: 9;
+  width: 80%;
+}
+
+.form-container {
+  padding: 20px;
+  background-color: rgb(206, 188, 167);
+  border: hidden;
+  border-radius: 7px;
+}
+
+.form-container>* {
+  padding: 8px;
+}
+
+.form-submission {
+  text-align: right;
+}
+
+.cancel {
+  font-size: 35pt;
+  color: rgb(203, 100, 84);
+  padding: 0;
+  display: flex;
+}
+
+.form-title {
+  font-size: xx-large;
+  display: flex;
+  color: rgb(150, 99, 49)
+}
+
+.form-container>label {
+  color: rgb(150, 99, 49);
+  padding: 0;
+}
+
+.add-container {
+  display: flex;
+  justify-content: end;
+  padding: 0;
+}
+
+.submit {
+  font-size: 35pt;
+  line-height: 20pt;
+  color: rgb(130, 151, 92);
+  padding: 0;
+}
+
+.close-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
 }

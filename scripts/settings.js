@@ -16,8 +16,6 @@ function setFridgeId(fridgeId) {
     currentFridge = fridgeId;
 }
 
-
-
 //Toggle button for activating notifications
 const toggleButtonContainer = document.querySelectorAll('.toggle-button');
 const toggleButton = document.querySelectorAll('.toggle-button i');
@@ -62,17 +60,6 @@ function closeCForm() {
 }
 
 // Toggle Notifications
-
-//Toggle dropdown menu for fridge list
-const fridgeListContainer = document.querySelector('.fridge-dropdown');
-const fridgeList = document.querySelector('.fridge-dropdown i');
-
-fridgeListContainer.addEventListener('click', function () {
-    fridgeList.classList.toggle('fa-caret-down');
-    fridgeList.classList.toggle('fa-caret-up');
-});
-
-
 var currentUser;               //points to the document of the user who is logged in
 function notificationToggle() {
     db.collection("users")

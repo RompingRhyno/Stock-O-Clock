@@ -129,6 +129,7 @@ document.getElementById('numberChoice').addEventListener('change', function () {
         this.selectedIndex = -1;
     }
 });
+
 // Write food info from form to firebase
 var stockForm = document.getElementById('myForm');
 stockForm.addEventListener('submit', function () {
@@ -165,6 +166,16 @@ stockForm.addEventListener('submit', function () {
         //console.log("bbDateString :" + bbDateString);
     }
     console.log("dateSubmit: " + dateSubmit);
+
+    // db.collection("users").doc(userId).collection("autoFill").doc().add({
+    //     name: foodNameInput
+    // })
+    // .then(function () {
+    //     //console.log('Document written with ID: ', docRef.id);
+    //     // Reload the page after the write is successful
+    //     location.reload(); // This will trigger a page refresh
+    // })
+
     foodsRef.add({
         name: foodName,
         bbDate: dateSubmit
@@ -177,6 +188,8 @@ stockForm.addEventListener('submit', function () {
         .catch(function (error) {
             console.error('Error adding document: ', error);
         });
+
+    
     // Clear the form fields
     document.getElementById('food').value = '',
     document.getElementById('date').value = '';

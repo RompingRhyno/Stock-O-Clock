@@ -37,7 +37,7 @@ body {
   background-color: rgb(150, 99, 49);
 }
 .tab-container {
-  background-color: #2c362a;
+  background-color: #2f2a36;
   padding:10%;
   border-style: hidden;
   border-top-left-radius: 10px;
@@ -71,7 +71,7 @@ footer {
   color: rgb(137, 176, 53);
   z-index: 3;
   bottom: 140px;
-  position:fixed;
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -36,6 +36,8 @@ body {
   border-style: hidden;
   background-color: rgb(150, 99, 49);
   color: tan;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .tab-container {
@@ -43,6 +45,8 @@ body {
   border-style: hidden, solid, solid, solid;
   border-bottom-left-radius: 10px;
   padding: 10%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 footer {

@@ -32,12 +32,12 @@ for (let i = 0; i < toggleButton.length; i++) {
 //Toggle dropdown menu for fridge list
 const fridgeListContainer = document.querySelector('.fridge-dropdown');
 const fridgeList = document.querySelector('.fridge-dropdown i');
-
-fridgeListContainer.addEventListener('click', function () {
+/* This is broken right now.
+fridgeListContainer.addEventListener('click', function () {1
         fridgeList.classList.toggle('fa-caret-down');
         fridgeList.classList.toggle('fa-caret-up');
 });
-
+*/
 
 var currentUser;               //points to the document of the user who is logged in
 function notificationToggle() {

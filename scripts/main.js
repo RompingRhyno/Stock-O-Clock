@@ -45,7 +45,7 @@ function editFood(event) {
         return;
       }
     var card = event.target.closest('.card');
-    var docId = card.getAttribute('data-doc-id');show
+    var docId = card.getAttribute('data-doc-id').show;
     console.log(docId);
     var foodField = document.getElementById('food');
     var dateField = document.getElementById('date');
@@ -65,8 +65,8 @@ function editFood(event) {
             var formattedDateString = `${year}-${month}-${day}`;
 
             // Fill the form fields with the current values
-            console.log(foodValue);
-            console.log(dateValue);
+            //console.log(foodValue);
+            //console.log(dateValue);
             foodField.value = foodValue;
             dateField.value = formattedDateString;
             
@@ -160,12 +160,15 @@ stockForm.addEventListener('submit', function () {
         var year = bbDateObj.getFullYear();
         var mes = bbDateObj.getMonth() + 1;
         var dia = bbDateObj.getDate();
+        if (dia < 10) {
+            dateDash = "-0";
+        }
+        else { dateDash = "-";}
         //Format to one string.
-        var bbDateString = (year) + "-" + (mes) + "-" + (dia) + 'T' + currentTime;
+        var bbDateString = (year) + "-" + (mes) + dateDash + (dia) + 'T' + currentTime;
         dateSubmit = bbDateString;
         //console.log("bbDateString :" + bbDateString);
     }
-    console.log("dateSubmit: " + dateSubmit);
 
     // db.collection("users").doc(userId).collection("autoFill").doc().add({
     //     name: foodNameInput
@@ -204,8 +207,6 @@ db.collection("foods").get().then(function (querySnapshot) {
     querySnapshot.forEach(function (doc) {
         var d = String(doc.id);
         foodDocument.push(d);
-        console.log(foodDocument);
-
     })
 })
 // Function to delete a document from Firestore
@@ -232,75 +233,6 @@ function deleteFood(event) {
             console.error('Error deleting document:', error);
         });
 }
-//NOT FUNCTIONING YET. TRYING TO SORT DATA WITH ARRAY.sort
-
-// Store database as an array for sorting
-function getFoods() {
-    var dataArray = [];
-    var foodsRef = db.collection("foods");
-    
-
-    // Loop through the documents in the collection
-    foodsRef.get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(foods) {
-    // Get the data from each document
-    var data = foods.data();
-
-    var bestBefore = foods.data().bbDate;
-    // Create current Date object
-    var currentDate = new Date();
-    // Create best before date object
-    var dateObject = new Date(bestBefore);
-    // Calculate the days left
-    var timeDifference = dateObject - currentDate;
-    var millisecondsInADay = 1000 * 60 * 60 * 24;
-    var daysDifference = Math.floor(timeDifference / millisecondsInADay);
-
-    // Extract the specific fields you want and store them in the array
-    var name = data.name;
-    var daysLeft = daysDifference;
-
-    dataArray.push({name, daysDifference});
-    });
-
-    function sort() {
-        db.collection("foods").orderBy("bbDate").get()
-        .then(allFood => {
-            allFood.forEach(doc => {
-                console.log(doc.data().bbDate);
-            })
-        })
-    }
-
-    });
-  
-    
-// Sort the cards based on the days (ascending order)
-
-  // Function to display the sorted cards
-  function displaySortedCards() {
-    var foodCardTemplate = document.getElementById('foodCardTemplate');
-    var cardContainer = document.getElementById("foods-go-here");
-    dataArray.forEach(function(food) {
-        let newcard = foodCardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
-        newcard.querySelector('.card-title').innerHTML = title;
-                if (daysDifference >= 0) {
-                    newcard.querySelector('.card-date').innerHTML = daysDifference + " days left";
-                } else if (daysDifference < 0) {
-                    newcard.querySelector('.card-date').innerHTML = "Expired by " + ((-1) * daysDifference) + " days";
-                } else if (bestBefore = " ") {
-                    newcard.querySelector('.card-date').innerHTML = "Click to add date";
-                }
-        document.getElementById("foods-go-here").appendChild(newcard);
-      var cardElement = createCardElement(card.title, card.date);
-      cardContainer.appendChild(cardElement);
-    });
-  }
-  
-  // Call the function to display the sorted cards
-  displaySortedCards();
-}
-getFoods();
 
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
@@ -314,14 +246,12 @@ function displayCardsDynamically() {
             allFoods.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
                 var bestBefore = doc.data().bbDate;  //gets the "bbDate" field
-                //console.log("firebase bb: " + bestBefore);
                 //var foodCode = doc.data().code;    //get unique ID to each food to be used for fetching right image
                 //var docID = doc.id;
                 // Convert the date string to a Date object
                 var dateObject = new Date(bestBefore);
                 // Create current Date object
                 var currentDate = new Date();
-                //console.log("currentdateobj: " + currentDate);
                 // Calculate the days left
                 var timeDifference = dateObject - currentDate;
                 var millisecondsInADay = 1000 * 60 * 60 * 24;
@@ -347,7 +277,6 @@ function displayCardsDynamically() {
                 // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
                 //attach to gallery, Example: "foods-go-here"
-                //console.log(newCard);
                 document.getElementById("foods-go-here").appendChild(newcard);
                 //i++;   //Optional: iterate variable to serve as unique ID
             })

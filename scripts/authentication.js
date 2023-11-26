@@ -93,8 +93,6 @@ var uiConfig = {
                                           name: "click to edit item"
                                    });
                             });
-
-                            
                      } else {
                             return true;
                      }

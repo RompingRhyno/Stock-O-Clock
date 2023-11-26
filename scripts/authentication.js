@@ -23,7 +23,7 @@ var uiConfig = {
                                    email: user.email,                       //with authenticated user's ID (user.uid)
                             }).then(function () {
                                    console.log("New user added to firestore");
-                                   window.location.assign("main.html");       //re-direct to main.html after signup
+                                   //window.location.assign("main.html");       //re-direct to main.html after signup
                             }).catch(function (error) {
                                    console.log("Error adding new user: " + error);
                             });
@@ -76,12 +76,10 @@ var uiConfig = {
                                    //users: []
                             })
                             .then(function() {
-                                   /* docRef.id contains the ID of the newly created document
-                                   var userFridgeList = db.collection("users").doc(user.uid);
-                                   userFridgeList.add({
-                                          fridges: [docRef.id]
-                                   })
-                                   */
+                                   // write the user.uid into fridge list
+                                   db.collection("users").doc(user.uid).update({
+                                          fridges: firebase.firestore.FieldValue.arrayUnion(user.uid)
+                                   });
                                    var foodCollection = db.collection("fridges").doc(user.uid).collection("food");
                                    foodCollection.add({
                                           bbDate: new Date(),
@@ -94,12 +92,15 @@ var uiConfig = {
                                    foodCollection.add({
                                           bbDate: new Date(),
                                           name: "Click any box to edit"
-                                   });
-                            })
-                            .catch(function(error) {
+                                   })
+                                   .then(function () {
+                                          console.log("New user added to firestore");
+                                          window.location.assign("main.html");
+                                   })
+                                   .catch(function(error) {
                                    console.error("Error: ", error);
-                            });
-                            
+                                   })
+                            })
                             
                             /*.then(doc => {
                                    id = doc.id;

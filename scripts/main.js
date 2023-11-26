@@ -45,8 +45,7 @@ function editFood(event) {
         return;
       }
     var card = event.target.closest('.card');
-    var docId = card.getAttribute('data-doc-id').show;
-    console.log(docId);
+    var docId = card.getAttribute('data-doc-id');
     var foodField = document.getElementById('food');
     var dateField = document.getElementById('date');
     db.collection("fridges").doc(getFridgeId()).collection("food").doc(docId).get()
@@ -160,6 +159,7 @@ stockForm.addEventListener('submit', function () {
         var year = bbDateObj.getFullYear();
         var mes = bbDateObj.getMonth() + 1;
         var dia = bbDateObj.getDate();
+        // Append 0 to the start of dates less than 10.
         if (dia < 10) {
             dateDash = "-0";
         }

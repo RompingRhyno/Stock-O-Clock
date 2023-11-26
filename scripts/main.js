@@ -45,6 +45,7 @@ function editFood(event) {
         return;
       }
     var card = event.target.closest('.card');
+    // Call the data doc id that was created along with each dynamic card
     var docId = card.getAttribute('data-doc-id');
     var foodField = document.getElementById('food');
     var dateField = document.getElementById('date');
@@ -263,6 +264,7 @@ function displayCardsDynamically() {
 
                 // Update food name and days left on card
                 newcard.querySelector('.card-title').innerHTML = title;
+                //doc id attribute to call on for editing data.
                 newcard.setAttribute('data-doc-id', doc.id);
                 if (daysDifference >= 0) {
                     newcard.querySelector('.card-date').innerHTML = daysDifference + " days left";

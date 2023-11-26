@@ -39,37 +39,56 @@
 
 
 <body>
-    
+
     <!------------------------------>
     <!-- Your HTML Layout go here -->
     <!------------------------------>
     <!-- Stuff for body goes here -->
+    <div class="form-popup" id="myForm-j">
+        <form class="form-container">
+            <div class="close-container">
+                <span class="form-title">Join A Fridge</span>
+                <button type="button" class="btn cancel" onclick="closeJForm()">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+            </div>
+            <br>
+            <label for="stock" id="stock"><b>Enter Fridge Name</b></label>
+            <br>
+            <input type="text" id="join-fridge" placeholder="Enter Name" name="join-fridge" required>
+            <br>
+            <div class="add-container">
+                <button type="submit" class="btn submit">
+                    <i class="fa-solid fa-circle-plus bgadd"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="form-popup" id="myForm-c">
+        <form class="form-container">
+            <div class="close-container">
+                <span class="form-title">Create A Fridge</span>
+                <button type="button" class="btn cancel" onclick="closeCForm()">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+            </div>
+            <br>
+            <label for="stock" id="stock"><b>Enter Fridge Name</b></label>
+            <br>
+            <input type="text" id="create-fridge" placeholder="Enter Name" name="create-fridge" required>
+            <br>
+            <div class="add-container">
+                <button type="submit" class="btn submit">
+                    <i class="fa-solid fa-circle-plus bgadd"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
     <div class="container options-card">
         <h1>Settings</h1>
-        <div class="container">
-            <div class="card py-2 mx-3 mt-3">
-                <div class="card-body">
-                    <div class="option">
-                        <span>Shared Fridge List</span>
-                        <div class="fridge-dropdown">
-                            <i class="fa-solid fa-caret-down fa-3x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="card py-2 mx-3 mt-3">
-                <div class="card-body">
-                    <div class="option">
-                        <span>Fridge Join</span>
-                        <div class="toggle-button">
-                            <i class="fa-solid fa-toggle-off fa-3x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="container">
             <div class="card py-2 mx-3 mt-3">
                 <div class="card-body">
@@ -82,80 +101,97 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="container">
-            <div class="card py-2 mx-3 mt-3">
-                <div class="card-body">
-                    <div class="option">
-                        <span>Alert Notifications</span>
-                        <div class="toggle-button">
-                            <i class="fa-solid fa-toggle-off fa-3x"></i>
-                        </div>
+    <div class="container">
+        <div class="card py-2 mx-3 mt-3">
+            <div class="card-body">
+                <div class="option">
+                    <span>Join Fridge</span>
+                    <div class="add-items-container">
+                        <button type="open-button" class="btn add" onclick="openJForm()">
+                            <i id="icon-bg" class="fa-solid fa-circle-plus fa-2xl"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="container">
-            <div class="card py-2 mx-3 mt-3">
-                <div class="card-body">
-                    <div class="option">
-                        <span>Expiration Notification</span>
-                        <div class="toggle-button">
-                            <i class="fa-solid fa-toggle-off fa-3x"></i>
-                        </div>
+    <div class="container">
+        <div class="card py-2 mx-3 mt-3">
+            <div class="card-body">
+                <div class="option">
+                    <span>Create Fridge</span>
+                    <div class="add-items-container">
+                        <button type="open-button" class="btn add" onclick="openCForm()">
+                            <i id="icon-bg" class="fa-solid fa-circle-plus fa-2xl"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="container">
-            <div class="card py-2 mx-3 mt-3">
-                <div class="card-body">
-                    <div class="option">
-                        <span>Reminders</span>
-                        <div class="toggle-button">
-                            <i class="fa-solid fa-toggle-off fa-3x"></i>
-                        </div>
+    <div class="container">
+        <div class="card py-2 mx-3 mt-3">
+            <div class="card-body">
+                <div class="option">
+                    <span>Fridge List</span>
+                    <div class="toggle-button-f">
+                        <i class="fa-solid fa-caret-down fa-3x"></i>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="container">
-            <div class="card py-2 mx-3 mt-3">
-                <div class="card-body">
-                    <div class="option">
-                        <span>Suggestions</span>
-                        <div class="toggle-button">
-                            <i class="fa-solid fa-toggle-off fa-3x"></i>
-                        </div>
+    <div class="container">
+        <div class="card py-2 mx-3 mt-3">
+            <div class="card-body">
+                <div class="option">
+                    <span>Alert Notifications</span>
+                    <div class="toggle-button">
+                        <i class="fa-solid fa-toggle-off fa-3x"></i>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="container">
-            <div class="card py-2 mx-3 mt-3">
-                <div class="card-body">
-                    <div class="option">
-                        <span>Tips</span>
-                        <div class="toggle-button">
-                            <i class="fa-solid fa-toggle-off fa-3x"></i>
-                        </div>
+    <div class="container">
+        <div class="card py-2 mx-3 mt-3">
+            <div class="card-body">
+                <div class="option">
+                    <span>Expiration Notification</span>
+                    <div class="toggle-button">
+                        <i class="fa-solid fa-toggle-off fa-3x"></i>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="container">
-            <div class="card py-2 mx-3 mt-3">
-                <div class="card-body">
-                    <div class="option">
-                        <span>Option 6</span>
-                        <div class="toggle-button">
-                            <i class="fa-solid fa-toggle-off fa-3x"></i>
-                        </div>
+    <div class="container">
+        <div class="card py-2 mx-3 mt-3">
+            <div class="card-body">
+                <div class="option">
+                    <span>Reminders</span>
+                    <div class="toggle-button">
+                        <i class="fa-solid fa-toggle-off fa-3x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card py-2 mx-3 mt-3">
+            <div class="card-body">
+                <div class="option">
+                    <span>Suggestions</span>
+                    <div class="toggle-button">
+                        <i class="fa-solid fa-toggle-off fa-3x"></i>
                     </div>
                 </div>
             </div>

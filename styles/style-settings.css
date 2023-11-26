@@ -36,8 +36,8 @@ body {
   border-style: hidden;
   background-color: rgb(150, 99, 49);
   color: tan;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 .tab-container {

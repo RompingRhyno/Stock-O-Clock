@@ -44,17 +44,15 @@ body {
   border-top-right-radius: 10px;
 }
 .add-items-container {
-  grid-area: add;
-  text-align: center;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-footer{
-  display:grid;
-  grid-template-areas: 
-  ". add ."
-  "shop stock setting";
+footer {
+  display: grid;
+  grid-template-areas:
+    "shop stock setting";
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
   row-gap: 15px;
 }
 .nav-icon {
@@ -72,6 +70,11 @@ footer{
   /*color: rgb(136, 134, 236);*/
   color: rgb(137, 176, 53);
   z-index: 3;
+  bottom: 140px;
+  position:fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 button i:before {
   content: "";
@@ -83,7 +86,6 @@ button i:before {
 .delete i:before {
   background: rgba(0, 0, 0, 0);
 }
-
 .form-popup {
   display: none;
   position: fixed;
@@ -120,11 +122,6 @@ button i:before {
 }
 .form-container > label {
   color: rgb(150, 99, 49);
-  padding: 0;
-}
-.add-container {
-  display: flex;
-  justify-content: end;
   padding: 0;
 }
 .submit {
@@ -174,7 +171,6 @@ button i:before {
   padding-bottom: 200px;
 }
 #numberChoice {
-  
   padding: 12px;
   overflow-y: auto;
 }

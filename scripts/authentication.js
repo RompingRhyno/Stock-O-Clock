@@ -17,13 +17,13 @@ var uiConfig = {
                      //------------------------------------------------------------------------------------------
                      var user = authResult.user;                            // get the user object from the Firebase authentication database
                      if (authResult.additionalUserInfo.isNewUser) {         //if new user
-                            db.collection("users").doc(user.uid).set({         //write to firestore. We are using the UID for the ID in users collection
+                            db.collection("users").doc(user.uid).set({      //write to firestore. We are using the UID for the ID in users collection
                                    name: user.displayName, 
-                                   fridges: [],                   //"users" collection
-                                   email: user.email,                         //with authenticated user's ID (user.uid)
+                                   fridges: [],                             //"users" collection
+                                   email: user.email,                       //with authenticated user's ID (user.uid)
                             }).then(function () {
                                    console.log("New user added to firestore");
-                                   //xwindow.location.assign("main.html");       //re-direct to main.html after signup
+                                   window.location.assign("main.html");       //re-direct to main.html after signup
                             }).catch(function (error) {
                                    console.log("Error adding new user: " + error);
                             });
@@ -42,7 +42,7 @@ var uiConfig = {
                             }).catch(function (error) {
                                    console.log("Error adding new user: " + error);
                             });
-
+                            /* Food to be stored in fridgees instead?
                             //adds a food collection to the users document
                             db.collection("users").doc(user.uid).collection("food").doc().set({
                                    
@@ -52,12 +52,12 @@ var uiConfig = {
                             }).catch(function (error) {
                                    console.log("Error adding new user: " + error);
                             });
-
+                            */
                             db.collection("users").doc(user.uid).collection("shoppingList").doc().set({
 
                             }).then(function () {
                                    console.log("New user added to firestore");
-                                   window.location.assign("main.html");       //re-direct to main.html after signup
+                                   //window.location.assign("main.html");       //re-direct to main.html after signup
                             }).catch(function (error) {
                                    console.log("Error adding new user: " + error);
                             });
@@ -66,17 +66,42 @@ var uiConfig = {
                                    test: "Something"
                             }).then(function () {
                                    console.log("New user added to firestore");
-                                   window.location.assign("main.html");       //re-direct to main.html after signup
+                                   //window.location.assign("main.html");       //re-direct to main.html after signup
                             }).catch(function (error) {
                                    console.log("Error adding new user: " + error);
                             });
 
-                            var id;
-
-                            db.collection("fridges").doc().set({
+                            db.collection("fridges").doc(user.uid).set({
                                    fridgeName: user.displayName + "\'s fridge",
-                                   users: []
-                            }).then(doc => {
+                                   //users: []
+                            })
+                            .then(function() {
+                                   /* docRef.id contains the ID of the newly created document
+                                   var userFridgeList = db.collection("users").doc(user.uid);
+                                   userFridgeList.add({
+                                          fridges: [docRef.id]
+                                   })
+                                   */
+                                   var foodCollection = db.collection("fridges").doc(user.uid).collection("food");
+                                   foodCollection.add({
+                                          bbDate: new Date(),
+                                          name: "Click + to add item"
+                                   });
+                                   foodCollection.add({
+                                          bbDate: new Date(),
+                                          name: "Click trash to delete"
+                                   });
+                                   foodCollection.add({
+                                          bbDate: new Date(),
+                                          name: "Click any box to edit"
+                                   });
+                            })
+                            .catch(function(error) {
+                                   console.error("Error: ", error);
+                            });
+                            
+                            
+                            /*.then(doc => {
                                    id = doc.id;
                                    db.collection("fridges").doc(id).collection("food").doc().set({
                                           bbDate: new Date(),
@@ -93,6 +118,7 @@ var uiConfig = {
                                           name: "click to edit item"
                                    });
                             });
+                            */
                      } else {
                             return true;
                      }

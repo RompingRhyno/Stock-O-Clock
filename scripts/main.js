@@ -5,18 +5,7 @@ function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
         // Check if a user is signed in:
         if (user) {
-            var usersCollection = firebase.firestore().collection('users');
-            var userDocRef = usersCollection.doc(user.uid);
-
-            userDocRef.set({
-            email: user.email,
-            name: user.displayName, // You might need to adjust this based on how you handle user names
-            autofill: {/* initial data for autofill collection */},
-            settings: {/* initial data for settings collection */},
-            shoppingList: {/* initial data for shoppingList collection */},
-            fridges: {/* initial data for fridges collection */}
-            });
-
+            
             // Do something for the currently logged-in user here: 
             console.log(user.uid); //print the uid in the browser console
             console.log(user.displayName);  //print the user name in the browser console

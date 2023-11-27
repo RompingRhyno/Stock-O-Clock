@@ -1,15 +1,19 @@
 //var getDocs = require("firebase/firestore");
 //var collection = require("firebase/firestore");
-
+console.log("starting settings")
 var user = firebase.auth();
 
 //var currentLocation = "fridges";
-var currentFridge = "nqg7sC5Q4Z5SIBiBajfj";
+var currentFridge = userId;
 // var settings = db.collection("users").doc(user.uid)
 // .collection("settings").doc("settings");
 
 function getFridgeId() {
     return currentFridge;
+}
+
+function startFridgeId(id) {
+    currentFridge = id;
 }
 
 function setFridgeId(fridgeId) {

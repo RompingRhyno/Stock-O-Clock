@@ -1,6 +1,11 @@
 var userName;
 var userId;
 var userFridges;
+
+
+
+startFridgeId(userId);
+
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
         // Check if a user is signed in:
@@ -79,6 +84,17 @@ function editFood(event) {
 }
 
 function openForm(mode) {
+
+    var list = "";
+    db.collection("users").doc(userId).collection("autoFill").get()
+    .then(allFoods => {
+        allFoods.fodEach(doc => {
+            list += "<output value=\"" + doc.data().name +"\">" + doc.data().name + "</output>";
+        })
+    })
+
+    document.getElementById("autoFillList").innerHTML = list;
+    
     // Assuming there is a span with class "formTitle" in the popup form
     var formTitleSpan = document.querySelector('.form-title');
     if (formTitleSpan) {
@@ -94,6 +110,8 @@ function openForm(mode) {
     document.getElementById('numberChoice').addEventListener('click', function() {
         document.getElementById('date').value = '';
     });
+
+    
 }
 
 function sleep(ms) {

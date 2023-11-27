@@ -58,7 +58,8 @@
             <br>
             <label for="stock" id="stock"><b>Food</b></label>
             <br>
-            <input type="text" id="food" placeholder="Enter Food" name="food" required>
+            <input type="text" id="food" placeholder="Enter Food" name="food" required list="food" >
+            <datalist id="autoFillList"></datalist>
             <br><br>
             <label for="date"><b>Best Before</b></label>
             <br>
@@ -144,8 +145,9 @@
     <!-- Link to scripts of your own -->
     <!-- <script src="./scripts/script.js"></script> -->
     <script src="./scripts/firebaseAPI_TEAM33.js"></script>
-    <script src="./scripts/main.js"></script>
     <script src="./scripts/settings.js"></script>
+    <script src="./scripts/main.js"></script>
+    
     <script src="./scripts/fridge.js">
         //import updateDoc from "firebase/firstore";
     </script>

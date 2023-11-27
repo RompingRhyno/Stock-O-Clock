@@ -79,7 +79,6 @@ var uiConfig = {
                                    // write the user.uid into fridge list
                                    db.collection("users").doc(user.uid).collection("fridges").doc(user.uid).set({
                                           fridgeName: user.displayName + "\'s fridge"
-                                   })
                                    });
                                    var foodCollection = db.collection("fridges").doc(user.uid).collection("food");
                                    foodCollection.add({

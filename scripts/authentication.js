@@ -101,25 +101,6 @@ var uiConfig = {
                                    console.error("Error: ", error);
                                    })
                             })
-                            
-                            /*.then(doc => {
-                                   id = doc.id;
-                                   db.collection("fridges").doc(id).collection("food").doc().set({
-                                          bbDate: new Date(),
-                                          name: "click the plus sign to add an item"
-                                   });
-
-                                   db.collection("fridges").doc(id).collection("food").doc().set({
-                                          bbDate: new Date(),
-                                          name: "click the trash can to delete"
-                                   });
-
-                                   db.collection("fridges").doc(id).collection("food").doc().set({
-                                          bbDate: new Date(),
-                                          name: "click to edit item"
-                                   });
-                            });
-                            */
                      } else {
                             return true;
                      }

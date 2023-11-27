@@ -24,11 +24,9 @@ getNameFromAuth(); //run the function
 var user = firebase.auth();
 
 //var currentLocation = "fridges";
-var currentFridge;
+//var currentFridge;
 // var settings = db.collection("users").doc(user.uid)
 // .collection("settings").doc("settings");
-
-
 
 function setFridgeId(fridgeId) {
     currentFridge = fridgeId;
@@ -65,17 +63,10 @@ function closeJForm() {
     document.getElementById("myForm-j").style.display = "none";
     document.getElementById('join-fridge').value = '';
 }
-
-// Create Fridge Form
-
-function openCForm() {
-    document.getElementById("myForm-c").style.display = "block";
-}
-
-function closeCForm() {
-    document.getElementById("myForm-c").style.display = "none";
-    document.getElementById('create-fridge').value = '';
-}
+//Need a function to write form info to database
+    //Fridge ID needs to be written to user>userID>currentFridge
+    //Fridge ID needs to be added as a document with the same ID in user>userID>fridges>doc(fridgeID)
+    //Fridge Name needs to be written as a field in the above document
 
 // Toggle Notifications
 var currentUser;               //points to the document of the user who is logged in

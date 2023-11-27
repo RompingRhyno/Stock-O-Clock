@@ -208,6 +208,15 @@ footer {
   justify-content: space-between;
   padding: 0;
 }
+
+.fridge-card {
+  padding: 0%;
+}
+
+#fridges-go-here {
+  display: none;
+  margin-top: 0 !important;
+}
 .brown {
   color:rgb(150, 99, 49);
 }

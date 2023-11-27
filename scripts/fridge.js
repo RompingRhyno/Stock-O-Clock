@@ -22,21 +22,21 @@ function addFridge(name) {
     }).then(doc => {
         id = doc.id;
         db.collection("users").doc(userId).update({
-            fridges: firebase.firestore.FieldValue.arrayUnion({id: id})
+            fridges: firebase.firestore.FieldValue.arrayUnion({ id: id })
         })
     })
 }
 
 function joinFridge(id) {
     db.collection("fridges").doc(id).get()
-    .then(doc => {
-        db.collection("fridges").doc(id).update({
-            users: firebase.firestore.FieldValue.arrayUnion({id: userId})
+        .then(doc => {
+            db.collection("fridges").doc(id).update({
+                users: firebase.firestore.FieldValue.arrayUnion({ id: userId })
+            })
+            db.collection("users").doc(userId).update({
+                fridges: firebase.firestore.FieldValue.arrayUnion({ id: id })
+            })
         })
-        db.collection("users").doc(userId).update({
-            fridges: firebase.firestore.FieldValue.arrayUnion({id: id})
-        })
-    })
 }
 
 function getItemsInFridge() {
@@ -45,4 +45,14 @@ function getItemsInFridge() {
             console.log(doc.id);
         });
     });
+}
+
+function displayFridgeList() {
+    var fridgeList = document.getElementById("fridges-go-here");
+    if (fridgeList.style.display === "flex") {
+        fridgeList.style.display = "none";
+    }
+    else {
+        fridgeList.style.display = "flex";
+    }
 }

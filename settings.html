@@ -198,6 +198,22 @@
         </div>
     </template>
 
+    <template id="fridgeCardTemplate">
+        <div class="card py-2 mx-3 mt-3" style="width: 90vw">
+            <div class="card-body">
+                <div class="food-date">
+                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-date">placeholder</h5>
+                </div>
+                <div class="-container delete-container">
+                    <button type="button" class="btn delete excludeButton" onclick="deleteFridge(event)">
+                        <i class="fa-solid fa-trash-can trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
+
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->

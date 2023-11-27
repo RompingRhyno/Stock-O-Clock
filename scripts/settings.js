@@ -1,16 +1,34 @@
+var userName;
+var userId;
+var userFridges;
+function getNameFromAuth() {
+    firebase.auth().onAuthStateChanged(user => {
+        // Check if a user is signed in:
+        if (user) {
+            // Do something for the currently logged-in user here: 
+            // Get the first word (index 0)
+            //method #1:  insert with JS
+            userId = (user.uid);
+            document.getElementById("IDGoesHere").innerText = userId;
+
+        } else {
+            // No user is signed in.
+        }
+    });
+}
+getNameFromAuth(); //run the function
+
 //var getDocs = require("firebase/firestore");
 //var collection = require("firebase/firestore");
 
 var user = firebase.auth();
 
 //var currentLocation = "fridges";
-var currentFridge = "nqg7sC5Q4Z5SIBiBajfj";
+var currentFridge;
 // var settings = db.collection("users").doc(user.uid)
 // .collection("settings").doc("settings");
 
-function getFridgeId() {
-    return currentFridge;
-}
+
 
 function setFridgeId(fridgeId) {
     currentFridge = fridgeId;

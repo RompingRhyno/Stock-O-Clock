@@ -1,10 +1,30 @@
+var userName;
+var userId;
+var userFridges;
+function getNameFromAuth() {
+    firebase.auth().onAuthStateChanged(user => {
+        // Check if a user is signed in:
+        if (user) {
+            // Do something for the currently logged-in user here: 
+            // Get the first word (index 0)
+            //method #1:  insert with JS
+            userId = (user.uid);
+            document.getElementById("IDGoesHere").innerText = userId;
+
+        } else {
+            // No user is signed in.
+        }
+    });
+}
+getNameFromAuth(); //run the function
+
 //var getDocs = require("firebase/firestore");
 //var collection = require("firebase/firestore");
 console.log("starting settings")
 var user = firebase.auth();
 
 //var currentLocation = "fridges";
-var currentFridge = userId;
+//var currentFridge;
 // var settings = db.collection("users").doc(user.uid)
 // .collection("settings").doc("settings");
 
@@ -51,17 +71,10 @@ function closeJForm() {
     document.getElementById("myForm-j").style.display = "none";
     document.getElementById('join-fridge').value = '';
 }
-
-// Create Fridge Form
-
-function openCForm() {
-    document.getElementById("myForm-c").style.display = "block";
-}
-
-function closeCForm() {
-    document.getElementById("myForm-c").style.display = "none";
-    document.getElementById('create-fridge').value = '';
-}
+//Need a function to write form info to database
+    //Fridge ID needs to be written to user>userID>currentFridge
+    //Fridge ID needs to be added as a document with the same ID in user>userID>fridges>doc(fridgeID)
+    //Fridge Name needs to be written as a field in the above document
 
 // Toggle Notifications
 var currentUser;               //points to the document of the user who is logged in

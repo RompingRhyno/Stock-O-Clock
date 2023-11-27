@@ -109,7 +109,7 @@
                 <div class="option">
                     <span>Join Fridge</span>
                     <div class="add-items-container">
-                        <button type="open-button" class="btn add" onclick="openJForm()">
+                        <button type="open-button" class="btn add" onclick="openJForm();joinFridge()">
                             <i id="icon-bg" class="fa-solid fa-circle-plus fa-2xl"></i>
                         </button>
                     </div>
@@ -124,7 +124,7 @@
                 <div class="option">
                     <span>Create Fridge</span>
                     <div class="add-items-container">
-                        <button type="open-button" class="btn add" onclick="openCForm()">
+                        <button type="open-button" class="btn add" onclick="openCForm();addFridge()">
                             <i id="icon-bg" class="fa-solid fa-circle-plus fa-2xl"></i>
                         </button>
                     </div>
@@ -138,8 +138,28 @@
             <div class="card-body">
                 <div class="option">
                     <span>Fridge List</span>
-                    <div class="toggle-button-f">
+                    <div class="toggle-button-f" onclick="displayFridgeList()">
                         <i class="fa-solid fa-caret-down fa-3x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container fridge-card">
+
+            <!-- Here is the container for cards  -->
+            <!-- <div class="container">
+                <div id="fridges-go-here" class="row row-cols-auto">
+                </div>
+            </div> -->
+
+            <!-- Example -->
+            <div id="fridges-go-here" class="card py-2 mx-3 mt-3">
+                <div class="card-body">
+                    <div class="option">
+                        <span>Example List</span>
+                        <div class="toggle-button">
+                            <i class="fa-solid fa-trash-can fa-3x"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -242,6 +262,22 @@
                             <i class="fa-solid fa-toggle-off fa-3x"></i>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="fridgeCardTemplate">
+        <div class="card py-2 mx-3 mt-3" style="width: 90vw">
+            <div class="card-body">
+                <div class="food-date">
+                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-date">placeholder</h5>
+                </div>
+                <div class="-container delete-container">
+                    <button type="button" class="btn delete excludeButton" onclick="deleteFridge(event)">
+                        <i class="fa-solid fa-trash-can trash"></i>
+                    </button>
                 </div>
             </div>
         </div>

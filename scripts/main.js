@@ -257,7 +257,7 @@ function displayCardsDynamically(currentFridge) {
     const docRef = db.collection("users").doc(userId);
     docRef.get().then(function(doc) {
         if (doc.exists) {
-            currentFridge = doc.data().currentFridge;
+            currentFridge = doc.data().currentFridge; 
             let cardTemplate = document.getElementById("foodCardTemplate"); // Retrieve the HTML element with the ID "foodCardTemplate" and store it in the cardTemplate variable. 
             db.collection("fridges").doc(currentFridge).collection("food").orderBy("bbDate").get()   //the collection called "foods"
             .then(allFoods => {

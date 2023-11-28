@@ -118,16 +118,8 @@ function openForm(mode) {
         
     }, 500);
 
-    
 }
 
-function displayForm(mode) {
-    
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 function closeForm() {
     document.getElementById("myForm").style.display = "none";

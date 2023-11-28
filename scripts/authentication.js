@@ -64,7 +64,7 @@ var uiConfig = {
                             });
 
                             db.collection("users").doc(user.uid).collection("autoFill").doc().set({
-                                   test: "Something"
+                                   name: "Something"
                             }).then(function () {
                                    console.log("New user added to firestore");
                                    //window.location.assign("main.html");       //re-direct to main.html after signup

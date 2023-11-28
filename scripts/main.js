@@ -33,12 +33,12 @@ getNameFromAuth(); //run the function
 
 function getCurrentFridge(userId) {
     const docRef = db.collection("users").doc(userId);
-            docRef.get()
-            .then(function(doc) {
-                currentFridge = doc.data().currentFridge;
-                return currentFridge;
-            });
-            //console.log("inauth: " + currentFridge);
+    docRef.get()
+    .then(function(doc) {
+        currentFridge = doc.data().currentFridge;
+        return currentFridge;
+    });
+    //console.log("inauth: " + currentFridge);
 }
 //Card edits
 function editFood(event) {
@@ -118,16 +118,8 @@ function openForm(mode) {
         
     }, 500);
 
-    
 }
 
-function displayForm(mode) {
-    
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
@@ -167,17 +159,12 @@ stockForm.addEventListener('submit', function () {
         if (doc.exists) {
             currentFridge = doc.data().currentFridge;
             var foodsRef = db.collection("fridges").doc(currentFridge).collection("food");
-            //First letter of food to upper case
-            var foodNameInput = document.getElementById("food").value;
-            var foodName  = foodNameInput.substring(0,1).toUpperCase() + foodNameInput.substring(1);
-            //Calendar date value
-            var calDate = document.getElementById("date").value;
-            //Dropdown days left value
-            var dayOffset = document.getElementById("numberChoice").value;
-            // Get the current time
-            var currentTime = new Date().toLocaleTimeString('en-US', { hour12: false });
-            // Create an object to hold the data to be submitted
-            var dateSubmit;
+            var foodNameInput = document.getElementById("food").value;            
+            var foodName  = foodNameInput.substring(0,1).toUpperCase() + foodNameInput.substring(1); //First letter of food to upper case
+            var calDate = document.getElementById("date").value; //get date from calendar in form
+            var dayOffset = document.getElementById("numberChoice").value; //Dropdown days left value
+            var currentTime = new Date().toLocaleTimeString('en-US', { hour12: false }); // Get the current time
+            var dateSubmit; // Create an object to hold the data to be submitted
             // Add calendar date to the data object if it's not empty
             if (calDate !== '') {
                 dateSubmit = calDate + 'T' + currentTime;
@@ -202,30 +189,30 @@ stockForm.addEventListener('submit', function () {
                 var bbDateString = (year) + "-" + (mes) + dateDash + (dia) + 'T' + currentTime;
                 dateSubmit = bbDateString;
             }
-        
-            // db.collection("users").doc(userId).collection("autoFill").doc().add({
-            //     name: foodNameInput
-            // })
-            // .then(function () {
-            //     //console.log('Document written with ID: ', docRef.id);
-            //     // Reload the page after the write is successful
-            //     location.reload(); // This will trigger a page refresh
-            // })
-
+            db.collection("users").doc(userId).collection("autoFill").get()
+            .then(allItems => {
+                allItems.forEach(doc => {
+                    let flag = false;
+                    if(doc.data().name.toLowerCase() != foodName.toLowerCase() && !flag) {
+                        console.log("true");
+                        db.collection("users").doc(userId).collection("autoFill").doc().set({
+                            name: foodName
+                        });
+                        flag = true;
+                    }
+                })
+            })
+            // Adding the formatted data to firebase.
             foodsRef.add({
                 name: foodName,
                 bbDate: dateSubmit
             })
                 .then(function () {
-                    //console.log('Document written with ID: ', docRef.id);
-                    // Reload the page after the write is successful
                     location.reload(); // This will trigger a page refresh
                 })
                 .catch(function (error) {
                     console.error('Error adding document: ', error);
                 });
-
-            
             // Clear the form fields
             document.getElementById('food').value = '',
             document.getElementById('date').value = '';
@@ -269,7 +256,6 @@ function deleteFood(event) {
     card.remove();
 }
 
-
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
@@ -282,12 +268,9 @@ function displayCardsDynamically(currentFridge) {
             let cardTemplate = document.getElementById("foodCardTemplate"); // Retrieve the HTML element with the ID "foodCardTemplate" and store it in the cardTemplate variable. 
             db.collection("fridges").doc(currentFridge).collection("food").orderBy("bbDate").get()   //the collection called "foods"
             .then(allFoods => {
-                //var i = 1;  //Optional: if you want to have a unique ID for each food
                 allFoods.forEach(doc => { //iterate thru each doc
                     var title = doc.data().name;       // get value of the "name" key
                     var bestBefore = doc.data().bbDate;  //gets the "bbDate" field
-                    //var foodCode = doc.data().code;    //get unique ID to each food to be used for fetching right image
-                    //var docID = doc.id;
                     // Convert the date string to a Date object
                     var dateObject = new Date(bestBefore);
                     // Create current Date object
@@ -300,7 +283,6 @@ function displayCardsDynamically(currentFridge) {
                     var negTimeDifference = currentDate - dateObject;
                     var negDaysDifference = Math.floor(negTimeDifference / millisecondsInADay) * (-1);
                     let newcard = cardTemplate.content.cloneNode(true).firstElementChild; // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
-
                     // Update food name and days left on card
                     newcard.querySelector('.card-title').innerHTML = title;
                     //doc id attribute to call on for editing data.
@@ -312,27 +294,14 @@ function displayCardsDynamically(currentFridge) {
                     } else if (bestBefore == "") {
                         newcard.querySelector('.card-date').innerHTML = "Click to add date";
                     }
-                    //Optional: give unique ids to all elements for future use
-                    // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
-                    // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
-                    // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
-
-                    //attach to gallery, Example: "foods-go-here"
+                    //attach to food list, Example: "foods-go-here"
                     document.getElementById("foods-go-here").appendChild(newcard);
-                    //i++;   //Optional: iterate variable to serve as unique ID
                 })
             })
         }
     })
 }
-
 getNameFromAuth().then(() => {
     // This will only run after getNameFromAuth() is resolved
     displayCardsDynamically();
   });
-/*
-//var currentLocation = 
-window.setTimeout(function() {
-    displayCardsDynamically();
-}, 1000);  // Adjust the delay time as needed
-*/

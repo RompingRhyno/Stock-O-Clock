@@ -203,14 +203,16 @@ stockForm.addEventListener('submit', function () {
                 dateSubmit = bbDateString;
             }
         
-            // db.collection("users").doc(userId).collection("autoFill").doc().add({
-            //     name: foodNameInput
-            // })
-            // .then(function () {
-            //     //console.log('Document written with ID: ', docRef.id);
-            //     // Reload the page after the write is successful
-            //     location.reload(); // This will trigger a page refresh
-            // })
+            db.collection("users").doc(userId).collection("autoFill").get()
+            .then(allItems => {
+                allItems.forEach(doc => {
+                    if(!doc.data().name.toLowerCase().equals(foodName.toLowerCase())) {
+                        db.collection("users").doc(userId).collection("autoFIll").doc().set({
+                            name: foodName
+                        });
+                    }
+                })
+            })
 
             foodsRef.add({
                 name: foodName,

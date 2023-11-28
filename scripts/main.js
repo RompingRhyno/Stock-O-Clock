@@ -86,29 +86,37 @@ function openForm(mode) {
     var list = "";
     db.collection("users").doc(userId).collection("autoFill").get()
     .then(allFoods => {
-        allFoods.fodEach(doc => {
-            list += "<output value=\"" + doc.data().name +"\">" + doc.data().name + "</output>";
+        allFoods.forEach(doc => {
+            list += "<option value=\"" + doc.data().name +"\">" + doc.data().name + "</option>";
+            console.log(doc.data());
         })
     })
 
-    document.getElementById("autoFillList").innerHTML = list;
-    
-    // Assuming there is a span with class "formTitle" in the popup form
-    var formTitleSpan = document.querySelector('.form-title');
-    if (formTitleSpan) {
-        // Update the text based on the mode
-        formTitleSpan.textContent = (mode === 'edit') ? 'Edit Food' : 'Add Food';
-    }
-    document.getElementById("myForm").style.display = "block";
-    var dateField = document.getElementById('date');
-    var dayField = document.getElementById('numberChoice');
-    document.getElementById('date').addEventListener('click', function() {
-        document.getElementById('numberChoice').selectedIndex = 0;
-    });
-    document.getElementById('numberChoice').addEventListener('click', function() {
-        document.getElementById('date').value = '';
-    });
+    window.setTimeout(function() {
+        document.getElementById("autoFillList").innerHTML = list;
+        
+        var formTitleSpan = document.querySelector('.form-title');
+        if (formTitleSpan) {
+            // Update the text based on the mode
+            formTitleSpan.textContent = (mode === 'edit') ? 'Edit Food' : 'Add Food';
+        }
+        document.getElementById("myForm").style.display = "block";
+        var dateField = document.getElementById('date');
+        var dayField = document.getElementById('numberChoice');
+        document.getElementById('date').addEventListener('click', function() {
+            document.getElementById('numberChoice').selectedIndex = 0;
+        });
+        document.getElementById('numberChoice').addEventListener('click', function() {
+            document.getElementById('date').value = '';
+        });
+        //Assuming there is a span with class "formTitle" in the popup form
+        
+    }, 500);
 
+    
+}
+
+function displayForm(mode) {
     
 }
 

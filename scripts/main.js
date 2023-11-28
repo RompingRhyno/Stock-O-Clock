@@ -2,8 +2,9 @@ var userName;
 var userId;
 var userFridges;
 var currentFridge;
-const docRef = db.collection("users").doc(userId);
+
 function getNameFromAuth() {
+    return new Promise(resolve => {
     firebase.auth().onAuthStateChanged(user => {
         // Check if a user is signed in:
         if (user) {
@@ -20,21 +21,25 @@ function getNameFromAuth() {
             //$("#name-goes-here").text(userName); //using jquery
             //method #3:  insert using querySelector
             //document.querySelector("#name-goes-here").innerText = userName
-            const docRef = db.collection("users").doc(userId);
-            docRef.get()
-            .then(function(doc) {
-                if (doc.exists) {
-                // Access the value of the "currentFridge" field
-                currentFridge = doc.data().currentFridge;
-        }
-    });
+            getCurrentFridge(userId);
+            resolve();
         } else {
             // No user is signed in.
         }
     });
+})
 }
 getNameFromAuth(); //run the function
 
+function getCurrentFridge(userId) {
+    const docRef = db.collection("users").doc(userId);
+            docRef.get()
+            .then(function(doc) {
+                currentFridge = doc.data().currentFridge;
+                return currentFridge;
+            });
+            //console.log("inauth: " + currentFridge);
+}
 //Card edits
 function editFood(event) {
     if (event.target.closest('.excludeButton')) {
@@ -243,11 +248,12 @@ function deleteFood(event) {
     card.remove();
 }
 
+
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
 
-function displayCardsDynamically() {
+function displayCardsDynamically(currentFridge) {
     const docRef = db.collection("users").doc(userId);
     docRef.get().then(function(doc) {
         if (doc.exists) {
@@ -298,10 +304,14 @@ function displayCardsDynamically() {
         }
     })
 }
-                
-    
 
+getNameFromAuth().then(() => {
+    // This will only run after getNameFromAuth() is resolved
+    displayCardsDynamically();
+  });
+/*
 //var currentLocation = 
 window.setTimeout(function() {
     displayCardsDynamically();
-}, 500);  // Adjust the delay time as needed
+}, 1000);  // Adjust the delay time as needed
+*/

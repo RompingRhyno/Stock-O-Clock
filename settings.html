@@ -90,9 +90,17 @@
                     <div class="option">
                         <span>Fridge List</span>
                         <div class="toggle-button-f">
-                            <i class="fa-solid fa-caret-down fa-3x"></i>
+                            <i class="fa-solid fa-caret-down fa-3x" onclick="displayFridgeList()"></i>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="container fridge-card">
+
+            <!-- Here is the container for cards  -->
+            <div class="container">
+                <div id="fridges-go-here" class="row row-cols-auto">
                 </div>
             </div>
         </div>
@@ -183,6 +191,21 @@
     </footer>
 
     <!-- Templates for general use, not displayed -->
+    <template id="fridgeCardTemplate">
+        <div class="card py-2 mx-3 mt-3" style="width: 90vw">
+            <div class="card-body">
+                <div class="food-date">
+                    <h5 class="card-title">Card title</h5>
+                </div>
+                <div class="-container delete-container">
+                    <button type="button" class="btn delete excludeButton" onclick="deleteFridge(event)">
+                        <i class="fa-solid fa-trash-can trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
+
     <template id="settingCardTemplate">
         <div class="container">
             <div class="card py-2 mx-3 mt-3">
@@ -193,22 +216,6 @@
                             <i class="fa-solid fa-toggle-off fa-3x"></i>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <template id="fridgeCardTemplate">
-        <div class="card py-2 mx-3 mt-3" style="width: 90vw">
-            <div class="card-body">
-                <div class="food-date">
-                    <h5 class="card-title">Card title</h5>
-                    <h5 class="card-date">placeholder</h5>
-                </div>
-                <div class="-container delete-container">
-                    <button type="button" class="btn delete excludeButton" onclick="deleteFridge(event)">
-                        <i class="fa-solid fa-trash-can trash"></i>
-                    </button>
                 </div>
             </div>
         </div>

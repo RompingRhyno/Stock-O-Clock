@@ -192,10 +192,13 @@ stockForm.addEventListener('submit', function () {
             db.collection("users").doc(userId).collection("autoFill").get()
             .then(allItems => {
                 allItems.forEach(doc => {
-                    if(!doc.data().name.toLowerCase().equals(foodName.toLowerCase())) {
-                        db.collection("users").doc(userId).collection("autoFIll").doc().set({
+                    let flag = false;
+                    if(doc.data().name.toLowerCase() != foodName.toLowerCase() && !flag) {
+                        console.log("true");
+                        db.collection("users").doc(userId).collection("autoFill").doc().set({
                             name: foodName
                         });
+                        flag = true;
                     }
                 })
             })

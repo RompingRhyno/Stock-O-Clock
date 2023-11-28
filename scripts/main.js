@@ -189,9 +189,13 @@ stockForm.addEventListener('submit', function () {
                 var bbDateString = (year) + "-" + (mes) + dateDash + (dia) + 'T' + currentTime;
                 dateSubmit = bbDateString;
             }
+
+            //added just the name of the item entered into the autofill collection.
+            //adds the item only if the item was not already in the collection.
             db.collection("users").doc(userId).collection("autoFill").get()
             .then(allItems => {
                 allItems.forEach(doc => {
+                    //flag stops the program from adding multiple of the same items.
                     let flag = false;
                     if(doc.data().name.toLowerCase() != foodName.toLowerCase() && !flag) {
                         console.log("true");

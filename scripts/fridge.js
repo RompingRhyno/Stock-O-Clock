@@ -1,5 +1,3 @@
-//import updateDoc from "firebase/firestore"; 
-//const updateDoc = firebase.updateDoc();
 
 function displayFridges() {
     db.collection("users").doc(userId).get()
@@ -14,7 +12,6 @@ function displayFridges() {
 }
 
 function addFridge(name) {
-    //import updateDoc from "firebase/firestore";
     var id;
     const newFridge = db.collection("fridges").add({
         fridgeName: name,

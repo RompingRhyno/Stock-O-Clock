@@ -103,9 +103,6 @@ button i:before {
 .delete i:before {
   background: rgba(0, 0, 0, 0);
 }
-.shopping {
-  
-}
 .form-popup {
   display: none;
   position: fixed;

@@ -232,10 +232,10 @@ db.collection("foods").get().then(function (querySnapshot) {
 // Function to delete a document from Firestore
 function deleteDocument(docId) {
     const docRef = db.collection("users").doc(userId);
-    docRef.get().then(function(doc) {
+    docRef.get().then(doc => {
         if (doc.exists) {
             currentFridge = doc.data().currentFridge;
-            return db.collection("fridges").doc(currentFridge).collection("food").doc(docId).delete();
+            return db.collection("fridges").doc(userId).collection("food").doc(docId).delete();
         }
     })
 }
@@ -244,13 +244,21 @@ function deleteDocument(docId) {
 function deleteFood(event) {
     // Get the card element
     var card = event.target.closest('.card');
-
     // Extract any necessary information from the card (e.g., document ID)
     var docId = card.getAttribute('data-doc-id');
-
-    // Call the function to delete the document from Firestore
-    deleteDocument(docId)
-    card.remove();
+    document.getElementById("deleteConfirm").style.display = "block";
+    document.getElementById('deleteSubmit').addEventListener('click', function (e) {
+        e.preventDefault();
+        deleteDocument(docId);
+        card.remove();
+        console.log("deleted");
+        document.getElementById("deleteConfirm").style.display = "none";
+    });
+    document.getElementById('cancelSubmit').addEventListener('click', function (e) {
+        e.preventDefault();
+        document.getElementById("deleteConfirm").style.display = "none";
+    });
+    //Call the function to delete the document from Firestore
 }
 
 //------------------------------------------------------------------------------
@@ -267,6 +275,8 @@ function displayCardsDynamically(currentFridge) {
             .then(allFoods => {
                 allFoods.forEach(doc => { //iterate thru each doc
                     var title = doc.data().name;       // get value of the "name" key
+                    console.log(title);
+                    console.log(userId);
                     var bestBefore = doc.data().bbDate;  //gets the "bbDate" field
                     // Convert the date string to a Date object
                     var dateObject = new Date(bestBefore);

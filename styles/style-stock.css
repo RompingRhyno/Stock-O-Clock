@@ -238,3 +238,13 @@ option {
   color: rgb(203, 100, 84);
   font-size: larger; 
 }
+@media (min-width: 501px) {
+  .add {
+    bottom: 180px;
+  }
+}
+@media (min-width: 1001px) {
+  .add {
+    bottom: 200px;
+  }
+}

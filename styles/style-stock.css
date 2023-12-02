@@ -238,11 +238,31 @@ option {
 .confirmButton {
   display: inline-block;
   text-align: center;
+  align-items: end;
+  padding: 2%;
 }
 .deleteContainer {
   background-color: rgb(206, 188, 167);
   border-radius: 7px;
   padding: 3%;
+  text-align: center;
+}
+#deleteSubmit {
+  border-style:solid;
+  border-color: rgb(150, 99, 49);
+  color: rgb(206, 188, 167);
+  background-color: rgb(203, 100, 84);
+  margin-left:50px;
+}
+#cancelSubmit {
+  border-style:solid;
+  border-color: rgb(150, 99, 49);
+  color: rgb(206, 188, 167);
+  background-color: rgb(130, 151, 92);
+}
+#noConfirm {
+  margin-top: 10%;
+  margin-bottom: 5%;
 }
 @media (min-width: 501px) {
   .add {

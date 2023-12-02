@@ -114,12 +114,9 @@ function openForm(mode) {
         document.getElementById('numberChoice').addEventListener('click', function() {
             document.getElementById('date').value = '';
         });
-        //Assuming there is a span with class "formTitle" in the popup form
-        
+        //Assuming there is a span with class "formTitle" in the popup forms
     }, 500);
-
 }
-
 
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
@@ -203,7 +200,7 @@ stockForm.addEventListener('submit', function () {
                             name: foodName
                         });
                         flag = true;
-                    }
+                    }   
                 })
             })
             // Adding the formatted data to firebase.
@@ -253,20 +250,61 @@ function deleteFood(event) {
     var card = event.target.closest('.card');
     // Extract any necessary information from the card (e.g., document ID)
     var docId = card.getAttribute('data-doc-id');
-    document.getElementById("deleteConfirm").style.display = "block";
-    document.getElementById('deleteSubmit').addEventListener('click', function (e) {
-        e.preventDefault();
-        deleteDocument(docId);
-        card.remove();
-        console.log("deleted");
-        document.getElementById("deleteConfirm").style.display = "none";
-    });
-    document.getElementById('cancelSubmit').addEventListener('click', function (e) {
-        e.preventDefault();
-        document.getElementById("deleteConfirm").style.display = "none";
+    // Reference to the Firestore document
+    var settingsDocRef = db.collection("users").doc(userId).collection("settings").doc("settings");
+
+    // Get the document
+    settingsDocRef.get().then((doc) => {
+        if (doc.exists) {
+        // Document exists, check the value of deleteConfirm field
+        var deleteConfirmValue = doc.data().deleteConfirm;
+
+            if (deleteConfirmValue === true) {
+        
+                document.getElementById("deleteConfirm").style.display = "block";
+                var checkbox = document.getElementById('noConfirm');
+                var isNoConfirm = checkbox.checked;
+                const confirmRef = db.collection("users").doc(userId).collection("settings").doc("settings");
+                document.getElementById('deleteSubmit').addEventListener('click', function (e) {
+                    // Check if user doesn't want delete confirmations, set to false in database setting
+                    if (isNoConfirm){
+                        confirmRef.update({
+                            deleteConfirm: false
+                        })
+                    }
+                    e.preventDefault();
+                    // Complete doc and card removal
+                    deleteDocument(docId);
+                    card.remove();
+                    document.getElementById("deleteConfirm").style.display = "none";
+                });
+                document.getElementById('cancelSubmit').addEventListener('click', function (e) {
+                    if (isNoConfirm){
+                        console.log(isNoConfirm);
+                        confirmRef.update({
+                            deleteConfirm: false
+                        })
+                    }
+                    e.preventDefault();
+                    document.getElementById("deleteConfirm").style.display = "none";
+                });
+                } else {
+                    // Delete without displaying popup if delete confirmation is off
+                    deleteDocument(docId);
+                    card.remove();
+                    document.getElementById("deleteConfirm").style.display = "none";
+                    console.log("Delete confirmation is false");
+                }
+            } else {
+            // Document does not exist
+            console.log("Document does not exist");
+        }
+    }).catch((error) => {
+        console.error("Error getting document:", error);
     });
     //Call the function to delete the document from Firestore
 }
+
 
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from

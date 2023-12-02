@@ -81,8 +81,8 @@
                 <p class="form-title">Delete Food?</p>
             </div>
             <div class="confirmButton">
-                <button type="submit" class="btn" id="cancelSubmit">Cancel</button>
-                <button class="btn" id="deleteSubmit">Delete</button>
+                <button type="submit" class="btn cancelConfirm" id="cancelSubmit">Cancel</button>
+                <button class="btn deleteConfirm" id="deleteSubmit">Delete</button>
             </div>
             <br>
             <input type="checkbox" id="noConfirm" name="noConfirm">
@@ -162,6 +162,8 @@
     <script> $("input").on("click touch", function () { $("footer").hide(); }); </script>
     <script> $(".add").on("click touch", function () { $(".add").hide(); }); </script>
     <script> $(".cancel").on("click touch", function () { $("footer, .add").show(); }); </script>
+    <script> $(".cancelConfirm").on("click touch", function () { $("footer, .add").show(); }); </script>
+    <script> $(".deleteConfirm").on("click touch", function () { $("footer, .add").show(); }); </script>
 </body>
 
 </html>

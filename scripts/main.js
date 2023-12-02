@@ -106,8 +106,6 @@ function openForm(mode) {
             formTitleSpan.textContent = (mode === 'edit') ? 'Edit Food' : 'Add Food';
         }
         document.getElementById("myForm").style.display = "block";
-        var dateField = document.getElementById('date');
-        var dayField = document.getElementById('numberChoice');
         document.getElementById('date').addEventListener('click', function() {
             document.getElementById('numberChoice').selectedIndex = 0;
         });
@@ -258,42 +256,59 @@ function deleteFood(event) {
         if (doc.exists) {
         // Document exists, check the value of deleteConfirm field
         var deleteConfirmValue = doc.data().deleteConfirm;
-
             if (deleteConfirmValue === true) {
-        
                 document.getElementById("deleteConfirm").style.display = "block";
                 var checkbox = document.getElementById('noConfirm');
                 var isNoConfirm = checkbox.checked;
                 const confirmRef = db.collection("users").doc(userId).collection("settings").doc("settings");
                 document.getElementById('deleteSubmit').addEventListener('click', function (e) {
+                    e.preventDefault();
+                  
                     // Check if user doesn't want delete confirmations, set to false in database setting
-                    if (isNoConfirm){
-                        confirmRef.update({
-                            deleteConfirm: false
-                        })
-                    }
+                    var checkbox = document.getElementById('noConfirm');
+                    var isNoConfirm = checkbox.checked;
+                  
+                    // Update deleteConfirm in the database
+                    const updatePromise = confirmRef.update({
+                      deleteConfirm: isNoConfirm ? false : true
+                    });
+                  
+                    // Perform subsequent actions only after the update is complete
+                    updatePromise.then(() => {
+                      // Complete doc and card removal
+                      deleteDocument(docId);
+                      card.remove();
+                      document.getElementById("deleteConfirm").style.display = "none";
+                    }).catch((error) => {
+                      console.error("Error updating deleteConfirm:", error);
+                    });
+                  });
+                  
+                  document.getElementById('cancelSubmit').addEventListener('click', function (e) {
                     e.preventDefault();
-                    // Complete doc and card removal
-                    deleteDocument(docId);
-                    card.remove();
-                    document.getElementById("deleteConfirm").style.display = "none";
-                });
-                document.getElementById('cancelSubmit').addEventListener('click', function (e) {
-                    if (isNoConfirm){
-                        console.log(isNoConfirm);
-                        confirmRef.update({
-                            deleteConfirm: false
-                        })
-                    }
-                    e.preventDefault();
-                    document.getElementById("deleteConfirm").style.display = "none";
-                });
+                  
+                    // Check if user doesn't want delete confirmations, set to false in database setting
+                    var checkbox = document.getElementById('noConfirm');
+                    var isNoConfirm = checkbox.checked;
+                  
+                    // Update deleteConfirm in the database
+                    const updatePromise = confirmRef.update({
+                      deleteConfirm: isNoConfirm ? false : true
+                    });
+                  
+                    // Perform subsequent actions only after the update is complete
+                    updatePromise.then(() => {
+                      document.getElementById("deleteConfirm").style.display = "none";
+                    }).catch((error) => {
+                      console.error("Error updating deleteConfirm:", error);
+                    });
+                  });
+                  
                 } else {
                     // Delete without displaying popup if delete confirmation is off
                     deleteDocument(docId);
                     card.remove();
                     document.getElementById("deleteConfirm").style.display = "none";
-                    console.log("Delete confirmation is false");
                 }
             } else {
             // Document does not exist

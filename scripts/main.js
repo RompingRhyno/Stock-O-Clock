@@ -38,7 +38,6 @@ function getCurrentFridge(userId) {
         currentFridge = doc.data().currentFridge;
         return currentFridge;
     });
-    //console.log("inauth: " + currentFridge);
 }
 //Card edits
 function editFood(event) {
@@ -71,8 +70,6 @@ function editFood(event) {
                     var formattedDateString = `${year}-${month}-${day}`;
 
                     // Fill the form fields with the current values
-                    //console.log(foodValue);
-                    //console.log(dateValue);
                     foodField.value = foodValue;
                     dateField.value = formattedDateString;
                     
@@ -93,7 +90,6 @@ function openForm(mode) {
     .then(allFoods => {
         allFoods.forEach(doc => {
             list += "<option value=\"" + doc.data().name +"\">" + doc.data().name + "</option>";
-            console.log(doc.data());
         })
     })
 
@@ -163,7 +159,6 @@ stockForm.addEventListener('submit', function () {
             // Add calendar date to the data object if it's not empty
             if (calDate !== '') {
                 dateSubmit = calDate + 'T' + currentTime;
-                //console.log("caldate: " + dateSubmit)
             }
             // Add bbDateString to the data object if it's not empty
             if (dayOffset !== '') {
@@ -193,7 +188,7 @@ stockForm.addEventListener('submit', function () {
                     //flag stops the program from adding multiple of the same items.
                     let flag = false;
                     if(doc.data().name.toLowerCase() != foodName.toLowerCase() && !flag) {
-                        console.log("true");
+                        //console.log("true");
                         db.collection("users").doc(userId).collection("autoFill").doc().set({
                             name: foodName
                         });
@@ -335,8 +330,6 @@ function displayCardsDynamically(currentFridge) {
             .then(allFoods => {
                 allFoods.forEach(doc => { //iterate thru each doc
                     var title = doc.data().name;       // get value of the "name" key
-                    console.log(title);
-                    console.log(userId);
                     var bestBefore = doc.data().bbDate;  //gets the "bbDate" field
                     // Convert the date string to a Date object
                     var dateObject = new Date(bestBefore);

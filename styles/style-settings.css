@@ -98,7 +98,18 @@ footer {
   margin-left: auto;
 }
 
+.toggle-button-l {
+  grid-area: button;
+  height: 5%;
+  justify-content: center;
+  margin-left: auto;
+}
+
 .toggle-button-f i {
+  color: rgb(150, 99, 49);
+}
+
+.toggle-button-l i {
   color: rgb(150, 99, 49);
 }
 

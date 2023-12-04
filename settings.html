@@ -90,7 +90,8 @@
                     <div class="option">
                         <span>Fridge List</span>
                         <div class="toggle-button-f">
-                            <i class="fa-solid fa-caret-down fa-3x" onclick="displayFridgeList()"></i>
+                            <i class="fa-solid fa-caret-down fa-3x"
+                                onclick="displayFridges(); displayFridgeList();"></i>
                         </div>
                     </div>
                 </div>
@@ -192,7 +193,7 @@
 
     <!-- Templates for general use, not displayed -->
     <template id="fridgeCardTemplate">
-        <div class="card py-2 mx-3 mt-3" style="width: 90vw">
+        <div class="card py-2 mx-3 mt-3" style="width: 66vw; margin-left: 2% !important; margin-top: 0 !important;">
             <div class="card-body">
                 <div class="food-date">
                     <h5 class="card-title">Card title</h5>
@@ -220,6 +221,7 @@
             </div>
         </div>
     </template>
+
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->

@@ -62,33 +62,6 @@ fridgeForm.addEventListener('submit', function () {
     })
 });
 
-//Obsolete Code
-function addFridge(name) {
-    var id;
-    const newFridge = db.collection("fridges").add({
-        fridgeName: name,
-        users: []
-    }).then(doc => {
-        id = doc.id;
-        db.collection("users").doc(userId).update({
-            fridges: firebase.firestore.FieldValue.arrayUnion({ id: id })
-        })
-    })
-}
-
-//Obsolete Code
-function joinFridge(id) {
-    db.collection("fridges").doc(id).get()
-        .then(doc => {
-            db.collection("fridges").doc(id).update({
-                users: firebase.firestore.FieldValue.arrayUnion({ id: userId })
-            })
-            db.collection("users").doc(userId).update({
-                fridges: firebase.firestore.FieldValue.arrayUnion({ id: id })
-            })
-        })
-}
-
 function getItemsInFridge() {
     db.collection("fridges").doc(getFridgeId()).collection("food").get().then(allFood => {
         allFood.forEach(doc => {

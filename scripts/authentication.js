@@ -15,11 +15,12 @@ var uiConfig = {
                      // Before this works, you must enable "Firestore" from the firebase console.
                      // The Firestore rules must allow the user to write. 
                      //------------------------------------------------------------------------------------------
-                     var user = authResult.user;                            // get the user object from the Firebase authentication database
+                     var user = authResult.user;
+                     // startFridgeId(user.uid);                          // get the user object from the Firebase authentication database
                      if (authResult.additionalUserInfo.isNewUser) {         //if new user
                             db.collection("users").doc(user.uid).set({      //write to firestore. We are using the UID for the ID in users collection
                                    name: user.displayName, 
-                                   fridges: [],                             //"users" collection
+                                   currentFridge: user.uid,                              //"users" collection
                                    email: user.email,                       //with authenticated user's ID (user.uid)
                             }).then(function () {
                                    console.log("New user added to firestore");
@@ -63,7 +64,7 @@ var uiConfig = {
                             });
 
                             db.collection("users").doc(user.uid).collection("autoFill").doc().set({
-                                   test: "Something"
+                                   name: "Something"
                             }).then(function () {
                                    console.log("New user added to firestore");
                                    //window.location.assign("main.html");       //re-direct to main.html after signup
@@ -78,7 +79,7 @@ var uiConfig = {
                             .then(function() {
                                    // write the user.uid into fridge list
                                    db.collection("users").doc(user.uid).collection("fridges").doc(user.uid).set({
-                                          fridgeName: user.displayName + "\'s fridge"
+                                          fridgeName: user.displayName + "\'s fridge",
                                    });
                                    var foodCollection = db.collection("fridges").doc(user.uid).collection("food");
                                    foodCollection.add({
@@ -101,6 +102,7 @@ var uiConfig = {
                                    console.error("Error: ", error);
                                    })
                             })
+                            
                      } else {
                             return true;
                      }

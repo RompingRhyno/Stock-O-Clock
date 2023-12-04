@@ -40,7 +40,7 @@
 <body>
 
     <div class="name">
-        <h1><span id="nameGoesHere"></span>'s Food</h1>
+        <h1><span id="nameGoesHere"></span>'s Fridge</h1>
     </div>
 
     <!------------------------------>
@@ -55,10 +55,10 @@
                     <i class="fa-solid fa-circle-xmark"></i>
                 </button>
             </div>
-            <br>
             <label for="stock" id="stock"><b>Food</b></label>
             <br>
-            <input type="text" id="food" placeholder="Enter Food" name="food" required>
+            <input type="text" id="food" placeholder="Enter Food" name="food" list="autoFillList" required>
+            <datalist id="autoFillList"></datalist>
             <br><br>
             <label for="date"><b>Best Before</b></label>
             <br>
@@ -73,6 +73,20 @@
                     <i class="fa-solid fa-circle-plus bgadd"></i>
                 </button>
             </div>
+        </form>
+    </div>
+    <div class="form-popup" id="deleteConfirm">
+        <form class="deleteContainer">
+            <div>
+                <p class="form-title">Delete Food?</p>
+            </div>
+            <div class="confirmButton">
+                <button type="submit" class="btn cancelConfirm" id="cancelSubmit">Cancel</button>
+                <button class="btn deleteConfirm" id="deleteSubmit">Delete</button>
+            </div>
+            <br>
+            <input type="checkbox" id="noConfirm" name="noConfirm">
+            <label for="noConfirm">Don't show this again</label><br>
         </form>
     </div>
     <div class="container food-card">
@@ -145,13 +159,11 @@
     <!-- <script src="./scripts/script.js"></script> -->
     <script src="./scripts/firebaseAPI_TEAM33.js"></script>
     <script src="./scripts/main.js"></script>
-    <script src="./scripts/settings.js"></script>
-    <script src="./scripts/fridge.js">
-        //import updateDoc from "firebase/firstore";
-    </script>
     <script> $("input").on("click touch", function () { $("footer").hide(); }); </script>
     <script> $(".add").on("click touch", function () { $(".add").hide(); }); </script>
     <script> $(".cancel").on("click touch", function () { $("footer, .add").show(); }); </script>
+    <script> $(".cancelConfirm").on("click touch", function () { $("footer, .add").show(); }); </script>
+    <script> $(".deleteConfirm").on("click touch", function () { $("footer, .add").show(); }); </script>
 </body>
 
 </html>

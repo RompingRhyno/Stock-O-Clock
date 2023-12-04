@@ -232,7 +232,7 @@ function deleteDocument(docId) {
     docRef.get().then(doc => {
         if (doc.exists) {
             currentFridge = doc.data().currentFridge;
-            return db.collection("fridges").doc(userId).collection("food").doc(docId).delete();
+            return db.collection("fridges").doc(currentFridge).collection("food").doc(docId).delete();
         }
     })
 }

@@ -32,7 +32,7 @@ var uiConfig = {
                             //adds a setting collection to the users document
                             db.collection("users").doc(user.uid).collection("settings").doc("settings").set({
                                    notification: false,
-                                   alertNotification: false,
+                                   deleteConfirm: true,
                                    expirationNotification: false,
                                    reminder: false,
                                    suggestion: false,

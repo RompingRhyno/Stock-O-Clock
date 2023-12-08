@@ -312,7 +312,6 @@ function deleteFood(event) {
     }).catch((error) => {
         console.error("Error getting document:", error);
     });
-    //Call the function to delete the document from Firestore
 }
 
 
@@ -364,4 +363,4 @@ function displayCardsDynamically(currentFridge) {
 getNameFromAuth().then(() => {
     // This will only run after getNameFromAuth() is resolved
     displayCardsDynamically();
-  });
+});

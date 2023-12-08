@@ -43,17 +43,7 @@ var uiConfig = {
                             }).catch(function (error) {
                                    console.log("Error adding new user: " + error);
                             });
-                            /* Food to be stored in fridgees instead?
-                            //adds a food collection to the users document
-                            db.collection("users").doc(user.uid).collection("food").doc().set({
-                                   
-                            }).then(function () {
-                                   console.log("New user added to firestore");
-                                   window.location.assign("main.html");       //re-direct to main.html after signup
-                            }).catch(function (error) {
-                                   console.log("Error adding new user: " + error);
-                            });
-                            */
+                            
                             db.collection("users").doc(user.uid).collection("shoppingList").doc().set({
 
                             }).then(function () {

@@ -18,11 +18,13 @@ List technologies (with version numbers), API's, icons, fonts, images, media or 
 
 ## 4. Complete setup/installion/usage
 The current version 1.0 of the app is hosted here: https://stockoclock-cf594.web.app/
+* Works best on phone resolutions.
 * Sign-up and login to get started.
 * Follow the tips on the placeholder cards to learn how to use our app.
 
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
+* Media queries for non-mobile formats not fully functional
 * Shopping List is not yet implemented
 * Sharing 'fridges' is almost fully implemented, just needs some javascript to write current fridge selection to Firestore
 * Toggle to turn delete confirmations back on is not functional yet.
@@ -71,7 +73,7 @@ It has the following subfolders and files:
 |   /style-settings.css      # Styles for settings.html
 |   /style-shop.css          # Placeholder for shopList.html
 ├── fonts
-|   /louis_george_cafe_*     # Several font weights by <a href="https://www.dafont.com/chen-yining.d6681">Chen Yining</a> on <a href="https://www.dafont.com/">dafont</a>
+└── /louis_george_cafe_*     # Several font weights by <a href="https://www.dafont.com/chen-yining.d6681">Chen Yining</a> on <a href="https://www.dafont.com/">dafont</a>
 ```
 
 

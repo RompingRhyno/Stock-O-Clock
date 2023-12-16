@@ -1,4 +1,4 @@
-# Project Title
+# Stock-O-Clock
 
 ## 1. Project Description
 Due to the prevalence of avoidable household food waste, we are creating the mobile-first web based app "Stock-O-Clock" that combines the functionality of a grocery list with food storage tracking to notify users of upcoming food expiry dates.

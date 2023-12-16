@@ -4,13 +4,11 @@
 Due to the prevalence of avoidable household food waste, we are creating the mobile-first web based app "Stock-O-Clock" that combines the functionality of a grocery list with food storage tracking to notify users of upcoming food expiry dates.
 
 ## 2. Names of Contributors
-List team members and/or short bio's here... 
 * Ryan - the RompingRhyno
 * Hi, My name is Logan. I'm super excited to make this cool new app.
 * Hello, my name is Alex. I'm interested in the challenges that will come with developing this project.
 	
 ## 3. Technologies and Resources Used
-List technologies (with version numbers), API's, icons, fonts, images, media or data sources, and other resources that were used.
 * HTML, CSS, JavaScript
 * Bootstrap 5.0 (Frontend library)
 * Firebase 8.0 (BAAS - Backend as a Service)
